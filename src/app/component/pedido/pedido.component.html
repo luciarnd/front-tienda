@@ -1,0 +1,21 @@
+<div class="pedido-container">
+    <div class="cabecera-pedido">
+        <h2>Pedidos</h2>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let pedido of pedidos" id="tbody">
+            <td>{{pedido.id}}</td>
+            <td>{{pedido.fecha}}</td>
+            <td>{{pedido.clienteNombre}} {{pedido.clienteApellido1}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
