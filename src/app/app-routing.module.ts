@@ -5,6 +5,7 @@ import { ClienteComponent } from './component/cliente/cliente.component';
 import { DetallepedidoComponent } from './component/detallepedido/detallepedido.component';
 import { PedidoComponent } from './component/pedido/pedido.component';
 import { ProductoComponent } from './component/producto/producto.component';
+import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotros.component';
 
 const routes: Routes = [
   {path: 'pedido/all', component: PedidoComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'cliente/all', component:ClienteComponent},
   {path: 'detallepedido/all', component: DetallepedidoComponent},
   {path: 'categoria/all', component: CategoriaComponent},
+  {path: 'nosotros', component: SobreNosotrosComponent}
 ];
 
 @NgModule({
