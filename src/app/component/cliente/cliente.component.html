@@ -1,0 +1,28 @@
+<div class="pedido-container">
+    <div class="cabecera-pedido">
+        <h2>Clientes</h2>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido1</th>
+            <th>Apellido2</th>
+            <th>Telefono</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let cliente of clientes" id="tbody">
+            <td>{{cliente.id}}</td>
+            <td>{{cliente.dni}}</td>
+            <td>{{cliente.nombre}}</td>
+            <td>{{cliente.apellido1}}</td>
+            <td>{{cliente.apellido2}}</td>
+            <td>{{cliente.telefono}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
