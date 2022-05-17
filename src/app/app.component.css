@@ -24,3 +24,8 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+.nav-router li {
+    display: inline;
+    margin: 0 15px;
+}

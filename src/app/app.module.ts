@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PedidoComponent } from './component/pedido/pedido.component';
+import { DetallepedidoComponent } from './component/detallepedido/detallepedido.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PedidoComponent
+    PedidoComponent,
+    DetallepedidoComponent
   ],
   imports: [
     BrowserModule,
