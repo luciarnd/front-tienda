@@ -1,0 +1,21 @@
+<div class="categoria-container">
+    <div class="cabecera-categoria">
+        <h2>Categorias</h2>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let categoria of categorias" id="tbody">
+            <td>{{categoria.id}}</td>
+            <td>{{categoria.nombre}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+

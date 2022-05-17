@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Categoria } from './model/categoria';
 import { DetallePedido } from './model/detallepedido';
 import { Pedido } from './model/pedido';
+import { CategoriaService } from './services/categoria.service';
 import { DetallePedidoService } from './services/detalle-pedido.service';
 import { PedidoService } from './services/pedido.service';
 
@@ -16,8 +18,9 @@ export class AppComponent {
   title = 'Tienda';
   pedidos: Pedido[];
   detallePedidos: DetallePedido[];
+  categorias: Categoria[];
 
-  constructor(private router: Router, private pedidoService: PedidoService, private detallePedidoService: DetallePedidoService){}
+  constructor(private router: Router, private pedidoService: PedidoService, private detallePedidoService: DetallePedidoService, private categoriaService: CategoriaService){}
     getPedidos(){
       this.pedidoService.findAll().subscribe(data => {
         this.pedidos = data;
@@ -27,6 +30,12 @@ export class AppComponent {
     getDetallePedidos() {
       this.detallePedidoService.findAll().subscribe(data => {
         this.detallePedidos = data;
+      })
+    };
+
+    getCategorias() {
+      this.categoriaService.findAll().subscribe(data => {
+        this.categorias = data;
       })
     }
 
@@ -38,6 +47,10 @@ export class AppComponent {
 
     this.router.events.subscribe(value => {
       this.getDetallePedidos();
+    })
+
+    this.router.events.subscribe(value => {
+      this.getCategorias();
     })
   }
 }

@@ -17,13 +17,13 @@ export class DetallePedidoService {
    public findAll(): Observable<DetallePedido[]>{
      return this.http.get<DetallePedido[]>(`${this.apiBaseUrl}/detallepedido/all`);
    }
-   public updatePedido(detallePedido: DetallePedido): Observable<DetallePedido>{
+   public updateDetallePedido(detallePedido: DetallePedido): Observable<DetallePedido>{
      return this.http.put<DetallePedido>(`${this.apiBaseUrl}/detallepedido/update`, detallePedido)
    }
-   public addPedido(detallePedido: DetallePedido): Observable<DetallePedido>{
+   public addDetallePedido(detallePedido: DetallePedido): Observable<DetallePedido>{
      return this.http.post<DetallePedido>(`${this.apiBaseUrl}/detallepedido/add`, detallePedido)
    }
-   public deletePedido(id: number): Observable<DetallePedido>{
+   public deleteDetallePedido(id: number): Observable<DetallePedido>{
      return this.http.delete<DetallePedido>(`${this.apiBaseUrl}/detallepedido/delete/${id}`)
    }
 }
