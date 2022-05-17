@@ -1,0 +1,26 @@
+<div class="detallepedido-container">
+    <div class="cabecera-detallepedido">
+        <h2>Detalles de Pedidos</h2>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Cantidad</th>
+            <th>Precio por unidad</th>
+            <th>Pedido</th>
+            <th>Producto</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let detallepedido of detallepedidos" id="tbody">
+            <td>{{detallepedido.id}}</td>
+            <td>{{detallepedido.cantidad}}</td>
+            <td>{{detallepedido.precio_unidad}}</td>
+            <td>{{detallepedido.pedidoId}}</td>
+            <td>{{detallepedido.productoNombre}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
