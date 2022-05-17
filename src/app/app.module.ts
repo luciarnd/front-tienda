@@ -13,15 +13,11 @@ import { CategoriaComponent } from './component/categoria/categoria.component';
   declarations: [
     AppComponent,
     PedidoComponent,
-<<<<<<< HEAD
     DetallepedidoComponent,
-    CategoriaComponent
-=======
+    CategoriaComponent,
     ProductoComponent,
     ClienteComponent,
     DetallepedidoComponent
-
->>>>>>> 75f619845a7ae96c2db584d3c9802d348f070b7d
   ],
   imports: [
     BrowserModule,

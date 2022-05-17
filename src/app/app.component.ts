@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { Categoria } from './model/categoria';
-import { DetallePedido } from './model/detallepedido';
 import { Pedido } from './model/pedido';
 import { CategoriaService } from './services/categoria.service';
-=======
 import { Cliente } from './model/cliente';
 import { DetallePedido } from './model/detallepedido';
-import { Pedido } from './model/pedido';
 import { Producto } from './model/producto';
 import { ClienteService } from './services/cliente.service';
->>>>>>> 75f619845a7ae96c2db584d3c9802d348f070b7d
 import { DetallePedidoService } from './services/detalle-pedido.service';
 import { PedidoService } from './services/pedido.service';
 import { ProductoService } from './services/producto.service';
@@ -26,21 +21,12 @@ import { ProductoService } from './services/producto.service';
 export class AppComponent {
   title = 'Tienda';
   pedidos: Pedido[];
-
   productos: Producto[];
-  
   detallePedidos: DetallePedido[];
   categorias: Categoria[];
-
-<<<<<<< HEAD
-  constructor(private router: Router, private pedidoService: PedidoService, private detallePedidoService: DetallePedidoService, private categoriaService: CategoriaService){}
-=======
   clientes: Cliente[];
 
-  constructor(private router: Router, private pedidoService: PedidoService, private productoService: ProductoService, private detallePedidoService: DetallePedidoService, private clienteService: ClienteService){}
- 
-
->>>>>>> 75f619845a7ae96c2db584d3c9802d348f070b7d
+  constructor(private router: Router, private categoriaService: CategoriaService, private pedidoService: PedidoService, private productoService: ProductoService, private detallePedidoService: DetallePedidoService, private clienteService: ClienteService){}
     getPedidos(){
       this.pedidoService.findAll().subscribe(data => {
         this.pedidos = data;
@@ -81,14 +67,11 @@ export class AppComponent {
     })
 
     this.router.events.subscribe(value => {
-<<<<<<< HEAD
       this.getCategorias();
-=======
       this.getClientes();
     })
     this.router.events.subscribe(value => {
       this.getProductos();
->>>>>>> 75f619845a7ae96c2db584d3c9802d348f070b7d
     })
   }
 }
