@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/model/producto';
 import { ProductoService } from 'src/app/services/producto.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-producto',
@@ -17,6 +19,16 @@ export class ProductoComponent implements OnInit {
     this.productoService.findAll().subscribe(data => {
       this.productos = data;
     });
+  }
+
+  descargarExcel() {
+    this.productoService.descargaArchivo().subscribe( data => {
+      var blob = new Blob([data], { type: '*/*;charset=utf-8' });
+      FileSaver.saveAs(blob, "productos.xls");
+    });
+    (error: HttpErrorResponse) => {
+      alert("No se encontro el fichero");
+    };
   }
   
 

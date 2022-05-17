@@ -23,5 +23,8 @@ export class ProductoService {
   public deletePedido(id: number): Observable<Producto>{
     return this.http.delete<Producto>(`${this.apiBaseUrl}/producto/delete/${id}`)
   }
+  public descargaArchivo() {
+    return this.http.get(`${this.apiBaseUrl}/excel/download`, {responseType: 'blob'})
+  }
 
 }
