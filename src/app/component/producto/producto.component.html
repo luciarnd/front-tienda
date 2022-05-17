@@ -1,0 +1,27 @@
+<div class="pedido-container">
+    <div class="cabecera-pedido">
+        <h2>Productos</h2>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoria</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        <tr *ngFor="let producto of productos" id="tbody">
+            <td>{{producto.id}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio}}</td>
+            <td>{{producto.stock}}</td>
+            <td>{{producto.categoria}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,23 @@
+.pedido-container {
+    padding: 15px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    height: 25px;
+}
+
+#tbody {
+    height: 40px;
+}
+
+td {
+    border-bottom: 1px solid gray;
+}
