@@ -9,7 +9,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let categoria of categorias | paginate: {itemsPerPage: 2, currentPage: page}" id="tbody">
+        <tr *ngFor="let categoria of categorias | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{categoria.id}}</td>
             <td>{{categoria.nombre}}</td>
             <td></td>

@@ -16,7 +16,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let producto of productos" id="tbody">
+        <tr *ngFor="let producto of productos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{producto.id}}</td>
             <td>{{producto.nombre}}</td>
             <td>{{producto.descripcion}}</td>
@@ -28,3 +28,6 @@
         </tr>
     </table>
 </div>
+
+<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
+

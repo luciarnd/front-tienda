@@ -13,7 +13,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let cliente of clientes" id="tbody">
+        <tr *ngFor="let cliente of clientes | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{cliente.id}}</td>
             <td>{{cliente.dni}}</td>
             <td>{{cliente.nombre}}</td>
@@ -25,4 +25,7 @@
         </tr>
     </table>
 </div>
+
+<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
+
 

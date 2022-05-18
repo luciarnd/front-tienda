@@ -12,6 +12,7 @@ import * as FileSaver from 'file-saver';
 export class ProductoComponent implements OnInit {
   
   productos: Producto[];
+  page: number = 1;
   
   constructor(private productoService: ProductoService) { }
 

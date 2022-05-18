@@ -10,6 +10,7 @@ import { DetallePedidoService } from 'src/app/services/detalle-pedido.service';
 export class DetallepedidoComponent implements OnInit {
 
   detallepedidos: DetallePedido[];
+  page: number = 1;
 
   constructor(private detallePedidoService: DetallePedidoService) { }
 

@@ -10,12 +10,15 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let pedido of pedidos" id="tbody">
+        <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{pedido.id}}</td>
-            <td>{{pedido.fecha}}</td>
+            <td>{{pedido.fecha | date:'dd-MM-yyyy'}}</td>
             <td>{{pedido.clienteNombre}} {{pedido.clienteApellido1}}</td>
             <td></td>
             <td></td>
         </tr>
     </table>
 </div>
+
+<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
+

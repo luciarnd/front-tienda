@@ -7,15 +7,17 @@
             <th>ID</th>
             <th>Cantidad</th>
             <th>Precio por unidad</th>
+            <th>Precio total</th>
             <th>Pedido</th>
             <th>Producto</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let detallepedido of detallepedidos" id="tbody">
+        <tr *ngFor="let detallepedido of detallepedidos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{detallepedido.id}}</td>
             <td>{{detallepedido.cantidad}}</td>
             <td>{{detallepedido.precio_unidad}}</td>
+            <td>{{detallepedido.precio_unidad * detallepedido.cantidad}}</td>
             <td>{{detallepedido.pedidoId}}</td>
             <td>{{detallepedido.productoNombre}}</td>
             <td></td>
@@ -23,4 +25,7 @@
         </tr>
     </table>
 </div>
+
+<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
+
 

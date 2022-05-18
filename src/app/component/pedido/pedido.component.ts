@@ -11,6 +11,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class PedidoComponent implements OnInit {
 
   pedidos: Pedido[];
+  page: number = 1;
 
   constructor(private pedidoService: PedidoService) { }
 

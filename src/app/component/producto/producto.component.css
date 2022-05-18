@@ -46,3 +46,51 @@ td {
     font-weight: bold;
     cursor: pointer;
 }
+
+.paginator ::ng-deep .ngx-pagination a:hover,
+.paginator ::ng-deep .ngx-pagination button:hover {
+    border: 1px solid #8b8b8b;
+    color: black;
+    border-radius: 4px !important;
+}
+
+.paginator ::ng-deep .ngx-pagination .pagination-previous a::before,
+.paginator ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+    content: '<';
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.paginator ::ng-deep .ngx-pagination .pagination-next a::after,
+.paginator ::ng-deep .ngx-pagination .pagination-next.disabled::after {
+    content: '>';
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+
+.paginator ::ng-deep .ngx-pagination {
+    padding-left: 0px !important;
+}
+
+.paginator ::ng-deep .ngx-pagination .current {
+    background: rgb(168, 220, 255) !important;
+    border-radius: 4px !important;
+    color: black;
+}
+
+.paginator ::ng-deep .ngx-pagination .current:hover {
+    background: rgb(168, 220, 255) !important;
+    border-radius: 4px !important;
+}
+
+
+.paginator ::ng-deep .ngx-pagination a,
+.paginator ::ng-deep .ngx-pagination button {
+    color: #0a0a0a;
+    display: block;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
