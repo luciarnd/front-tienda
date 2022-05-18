@@ -5,9 +5,16 @@
 }
 
 .cabecera-categoria {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
+    margin: 15px 0;
+}
+
+.cabecera-categoria h2 {
+    display: inline;
+    margin-right: 15px;
+}
+
+.cabecera-categoria a {
+    margin-bottom: 10px;
 }
 
 .cabecera-categoria .btn {

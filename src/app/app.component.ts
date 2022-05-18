@@ -10,6 +10,7 @@ import { ClienteService } from './services/cliente.service';
 import { DetallePedidoService } from './services/detalle-pedido.service';
 import { PedidoService } from './services/pedido.service';
 import { ProductoService } from './services/producto.service';
+import { ProductoDTO } from './model/productoDTO';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { ProductoService } from './services/producto.service';
 export class AppComponent {
   title = 'Tienda';
   pedidos: Pedido[];
-  productos: Producto[];
+  productos: ProductoDTO[];
   detallePedidos: DetallePedido[];
   categorias: Categoria[];
   clientes: Cliente[];
