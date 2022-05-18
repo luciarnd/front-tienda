@@ -10,6 +10,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 export class CategoriaComponent implements OnInit {
 
   categorias: Categoria[];
+  page: number = 1;
 
   constructor(private categoriaService: CategoriaService) { }
 

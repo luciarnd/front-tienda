@@ -9,6 +9,7 @@ import { ClienteComponent } from './component/cliente/cliente.component';
 import { DetallepedidoComponent } from './component/detallepedido/detallepedido.component';
 import { CategoriaComponent } from './component/categoria/categoria.component';
 import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotros.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotro
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

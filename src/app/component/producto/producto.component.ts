@@ -24,7 +24,7 @@ export class ProductoComponent implements OnInit {
   descargarExcel() {
     this.productoService.descargaArchivo().subscribe( data => {
       var blob = new Blob([data], { type: '*/*;charset=utf-8' });
-      FileSaver.saveAs(blob, "productos.xls");
+      FileSaver.saveAs(blob, "productos.xlsx");
     });
     (error: HttpErrorResponse) => {
       alert("No se encontro el fichero");
