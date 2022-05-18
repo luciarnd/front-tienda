@@ -10,6 +10,7 @@ import { DetallepedidoComponent } from './component/detallepedido/detallepedido.
 import { CategoriaComponent } from './component/categoria/categoria.component';
 import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotros.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
