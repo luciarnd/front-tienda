@@ -10,7 +10,10 @@ import { DetallepedidoComponent } from './component/detallepedido/detallepedido.
 import { CategoriaComponent } from './component/categoria/categoria.component';
 import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotros.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+<<<<<<< HEAD
 import { EmailComponent } from './component/email/email.component';
+=======
+>>>>>>> a748f76287afe4cc50730f36cd6c4e1f7f1ee1f9
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

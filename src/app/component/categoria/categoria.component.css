@@ -1,5 +1,36 @@
-.categoria-container {
+
+
+#categoria-container {
     padding: 15px;
+}
+
+.cabecera-categoria {
+    margin: 15px 0;
+}
+
+.cabecera-categoria h2 {
+    display: inline;
+    margin-right: 15px;
+}
+
+.cabecera-categoria a {
+    margin-bottom: 10px;
+}
+
+.cabecera-categoria .btn {
+    height: 30px;
+    width: 30px;
+    padding-bottom: 6px;
+}
+
+.cabecera-categoria a:hover {
+    color: white;
+}
+
+.cabecera-categoria .btn i {
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 4px;
 }
 
 table {
@@ -20,6 +51,14 @@ th {
 
 td {
     border-bottom: 1px solid gray;
+}
+
+table a:hover {
+    color: white;
+}
+
+.paginator ::ng-deep .ngx-pagination {
+    margin-bottom: 30px;
 }
 
 .paginator ::ng-deep .ngx-pagination a:hover,
@@ -68,4 +107,16 @@ td {
     border-radius: 0;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+#obligatorio {
+    color: red;
+}
+
+.campoObligatorio {
+    font-size: 13px;
+}
+
+.form-control {
+    border-color: #007bff;
 }
