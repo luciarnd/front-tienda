@@ -10,6 +10,8 @@ import { DetallepedidoComponent } from './component/detallepedido/detallepedido.
 import { CategoriaComponent } from './component/categoria/categoria.component';
 import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotros.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EmailComponent } from './component/email/email.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductoComponent,
     ClienteComponent,
     DetallepedidoComponent,
-    SobreNosotrosComponent
+    SobreNosotrosComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,26 @@
+<div class="main-container">
+    <div class="flex flex-wrap ml-5">
+        <form #sendForm="ngForm" (ngSubmit)="sendEmail(sendForm)">
+            <div>
+                <label for="email">Email</label><br>
+                <input type="text" ngModel name="email" id="email" placeholder="email...">
+            </div>
+            <div>
+                <label for="asunto">Asunto</label><br>
+                <input type="text" id="asunto" ngModel name="asunto" placeholder="asunto...">
+            </div>
+            <div class="textarea">
+                <label for="mensaje">Mensaje</label>
+                <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Mensaje..." ngModel></textarea>
+            </div>
+            <div>
+                <input type="file" [ngModel] (change)="selectFile($event)">
+            </div>
+            <div class="flex flex-wrap gap-sm w-full">
+                <div class="mt-sm">
+                    <button [disabled]="sendForm.invalid" id="boton" type="submit">Envia email</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
