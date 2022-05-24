@@ -63,7 +63,7 @@ export class ProductoComponent implements OnInit {
   }
 
   public onDeleteCategoria(productoid: number): void {
-    this.productoService.deletePedido(productoid).subscribe(
+    this.productoService.deleteProducto(productoid).subscribe(
       (response: Producto) => {
         console.log(response);
         this.productoService.findAll();

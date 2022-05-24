@@ -22,7 +22,7 @@ export class ProductoService {
     console.log(producto);
     return this.http.post<Producto>(`${this.apiBaseUrl}/producto/add`, producto)
   }
-  public deletePedido(id: number): Observable<Producto>{
+  public deleteProducto(id: number): Observable<Producto>{
     return this.http.delete<Producto>(`${this.apiBaseUrl}/producto/delete/${id}`)
   }
   public descargaArchivo() {

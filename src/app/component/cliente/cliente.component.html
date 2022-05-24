@@ -1,31 +1,63 @@
 <div class="pedido-container">
+  <div>
     <div class="cabecera-pedido">
-        <h2>Clientes</h2>
+      <h2>Clientes</h2>
     </div>
     <table>
-        <tr>
-            <th>ID</th>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellido1</th>
-            <th>Apellido2</th>
-            <th>Telefono</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-        <tr *ngFor="let cliente of clientes | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
-            <td>{{cliente.id}}</td>
-            <td>{{cliente.dni}}</td>
-            <td>{{cliente.nombre}}</td>
-            <td>{{cliente.apellido1}}</td>
-            <td>{{cliente.apellido2}}</td>
-            <td>{{cliente.telefono}}</td>
-            <td></td>
-            <td></td>
-        </tr>
+      <tr>
+        <th>ID</th>
+        <th>DNI</th>
+        <th>Nombre</th>
+        <th>Apellido1</th>
+        <th>Apellido2</th>
+        <th>Telefono</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+      <tr *ngFor="let cliente of clientes | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <td>{{cliente?.id}}</td>
+        <td>{{cliente?.dni}}</td>
+        <td>{{cliente?.nombre}}</td>
+        <td>{{cliente?.apellido1}}</td>
+        <td>{{cliente?.apellido2}}</td>
+        <td>{{cliente?.telefono}}</td>
+        <td><button (click)="abrirModal(cliente,'edit')" class=""><i class="fa fa-pen"></i></button></td>
+        <td><button (click)="abrirModal(cliente,'delete')" class=""><i class="fa fa-trash"></i></button></td>
+      </tr>
     </table>
+    <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
+    </pagination-controls>
+  </div>
+</div>
+<div id="id01" class="modal">
+  <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
+  <form class="modal-content">
+    <div class="container">
+      <p>Seguro que queres eliminar al cliente {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}</p>
+      <div class="clearfix">
+        <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cancel</button>
+        <button type="button" (click)="onDeleteCliente(deleteCliente.id)"
+          onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+      </div>
+    </div>
+  </form>
 </div>
 
-<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
 
+<div id="id02" class=" modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Edita el cliente {{updateCliente.nombre}}</p>
+    <form #editForm="ngForm">
+      <div class="form-group">
+        <label for="dni">DNI</label>
+        <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni">
+      </div>
+      <button type="button"  (click)="cerrar('edit')" class="btn btn-secondary">Close</button>
+      <button (click)="onUpdateCliente(updateCliente)" data-dismiss="modal" class="btn btn-primary">Save
+        changes</button>
+    </form>
+  </div>
 
+</div>

@@ -15,13 +15,13 @@ export class ClienteService {
    public findAll(): Observable<Cliente[]>{
     return this.http.get<Cliente[]>(`${this.apiBaseUrl}/cliente/all`);
   }
-  public updateProducto(cliente: Cliente): Observable<Cliente>{
+  public updateCliente(cliente: Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${this.apiBaseUrl}/cliente/update`, cliente)
   }
-  public addProducto(cliente: Cliente): Observable<Cliente>{
+  public addCliente(cliente: Cliente): Observable<Cliente>{
     return this.http.post<Cliente>(`${this.apiBaseUrl}/cliente/add`, cliente)
   }
-  public deletePedido(id: number): Observable<Cliente>{
+  public deleteCliente(id: number): Observable<Cliente>{
     return this.http.delete<Cliente>(`${this.apiBaseUrl}/cliente/delete/${id}`)
   }
 }
