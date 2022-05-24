@@ -132,6 +132,10 @@ td {
     padding-top: 10px;
   }
 
+  .form-group {
+    margin-bottom: 10px;
+  }
+
   h5 {
     padding-bottom: 15px;
   }
