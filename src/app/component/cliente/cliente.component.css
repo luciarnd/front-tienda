@@ -2,6 +2,16 @@
     padding: 15px;
 }
 
+h2 {
+  display: inline;
+  margin: 0 0 20px 0;
+}
+
+.cabecera-cliente {
+  display: flex;
+  justify-content: space-between;
+}
+
 table {
     width: 100%;
     text-align: center;
@@ -62,6 +72,21 @@ td {
   .btn-rojo-sm:hover {
     background-color: #bd1b1b;
   }
+
+  .btn-linea-azul {
+    background-color: white;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: black;
+    padding: 2px 8px 4px 8px;
+    height: 32px;
+    margin-top: 7px;
+  }
+
+  .btn-linea-azul:hover {
+    background-color: #007bff;
+    color: white;
+  }
   
   
   .modal {
@@ -74,7 +99,7 @@ td {
     height: 100%; 
     overflow: auto; 
     background-color: #03030381;
-    padding-top: 50px;
+    padding-top: 30px;
   }
   
   

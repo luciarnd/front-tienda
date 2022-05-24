@@ -24,7 +24,7 @@ export class ClienteComponent implements OnInit {
       this.clientes = data;
     });
   }
-  public abrirModal(cliente: Cliente, mode:string){
+  public abrirModal(cliente: Cliente | null, mode:string){
     if(mode === 'delete'){
       document.getElementById('id01').style.display='block';
       this.deleteCliente=cliente;
@@ -35,23 +35,27 @@ export class ClienteComponent implements OnInit {
         this.updateCliente=cliente;
      }
     if(mode === 'add'){
-
+      document.getElementById('id03').style.display='block';
+      console.log("Entro");
+      cliente=null;
      }
 
   }
 
   public cerrar(mode: string){
-    if (mode == 'delete'){
+    if (mode === 'delete'){
       document.getElementById('id01').style.display='none';
     }
-    if (mode == 'edit'){
+    if (mode ==='edit'){
       document.getElementById('id02').style.display='none';
     }
-    if(mode == 'add'){}
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='none';
+    }
   }
 
   public onAddCliente(addForm: NgForm): void {
-    document.getElementById('add-categoria-form')?.click();
+    // document.getElementById('addForm')?.click();
     this.clienteService.addCliente(addForm.value).subscribe(
       (response: Cliente) => {
         console.log(response);
