@@ -1,6 +1,7 @@
 <div class="cliente-container">
   <div>
     <div class="cabecera-cliente">
+    <div class="cliente-pedido">
       <h2>Clientes</h2>
     </div>
     <table>
@@ -8,8 +9,8 @@
         <th>ID</th>
         <th>DNI</th>
         <th>Nombre</th>
-        <th>Apellido1</th>
-        <th>Apellido2</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
         <th>Telefono</th>
         <th>Editar</th>
         <th>Eliminar</th>
@@ -21,43 +22,56 @@
         <td>{{cliente?.apellido1}}</td>
         <td>{{cliente?.apellido2}}</td>
         <td>{{cliente?.telefono}}</td>
-        <td><button (click)="abrirModal(cliente,'edit')" class=""><i class="fa fa-pen"></i></button></td>
-        <td><button (click)="abrirModal(cliente,'delete')" class=""><i class="fa fa-trash"></i></button></td>
+        <td><button (click)="abrirModal(cliente,'edit')" class="btn-azul-sm"><i class="fa fa-pen fa-xs"></i></button></td>
+        <td><button (click)="abrirModal(cliente,'delete')" class="btn-rojo-sm"><i class="fa fa-trash fa-xs"></i></button></td>
       </tr>
     </table>
     <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
     </pagination-controls>
+
   </div>
-
-<div id="id01" class="modal">
-  <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
-  <form class="modal-content">
-    <div class="container">
-      <p>Seguro que queres eliminar al cliente {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}</p>
-      <div class="clearfix">
-        <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cancel</button>
-        <button type="button" (click)="onDeleteCliente(deleteCliente.id)"
-          onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
-      </div>
-    </div>
-  </form>
 </div>
-
-
-<div id="id02" class=" modal">
-  <div class="modal-content" *ngIf="updateCliente">
-    <span class="close">&times;</span>
-    <p>Edita el cliente {{updateCliente.nombre}}</p>
-    <form #editForm="ngForm">
-      <div class="form-group">
-        <label for="dni">DNI</label>
-        <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni">
+  <div id="id01" class="modal">
+    <form class="modal-content">
+      <div class="container">
+        <span (click)="cerrar('delete')" class="close" title="Close Modal" id="cerrardelete">x</span>
+        <h5>¿Seguro que quieres eliminar a {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}?</h5>
+        <div class="clearfix">
+          <button type="button" (click)="onDeleteCliente(deleteCliente.id)"
+            onclick="document.getElementById('id01').style.display='none'" class="btn-rojo">Borrar</button>
+        </div>
       </div>
-      <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Close</button>
-      <button (click)="onUpdateCliente(updateCliente)" data-dismiss="modal" class="btn btn-primary">Save
-        changes</button>
     </form>
   </div>
 
-</div>
+  <div id="id02" class=" modal">
+    <div class="modal-content" *ngIf="updateCliente">
+      <span (click)="cerrar('edit')" class="close" title="Close Modal">x</span>
+      <h5>Editar Cliente: {{updateCliente.nombre}}</h5>
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni">
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" [(ngModel)]="updateCliente.nombre" name="nombre" class="form-control" id="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido1">Primer Apellido</label>
+          <input type="text" [(ngModel)]="updateCliente.apellido1" name="apellido1" class="form-control" id="apellido1">
+        </div>
+        <div class="form-group">
+          <label for="apellido2">Segundo Apellido</label>
+          <input type="text" [(ngModel)]="updateCliente.apellido2" name="apellido2" class="form-control" id="apellido2">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input type="text" [(ngModel)]="updateCliente.telefono" name="telefono" class="form-control" id="telefono">
+        </div>
+        <button (click)="onUpdateCliente(updateCliente)"  onclick="document.getElementById('id02').style.display='none'" class="btn-azul"> Guardar</button>
+      </form>
+    </div>
+
+  </div>
 </div>

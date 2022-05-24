@@ -27,11 +27,12 @@ export class ClienteComponent implements OnInit {
   public abrirModal(cliente: Cliente, mode:string){
     if(mode === 'delete'){
       document.getElementById('id01').style.display='block';
+      this.deleteCliente=cliente;
      
     }
      if(mode === 'edit'){
       document.getElementById('id02').style.display='block';
-     
+        this.updateCliente=cliente;
      }
     if(mode === 'add'){
 
