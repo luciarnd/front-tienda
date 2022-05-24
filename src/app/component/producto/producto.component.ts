@@ -33,6 +33,26 @@ export class ProductoComponent implements OnInit {
     });
   }
 
+  public search(key: any): void {
+    console.log(key);
+    const res: ProductoDTO[] = [];
+    for (const producto of this.productos) {
+      if(producto.nombre.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+      producto.descripcion.toLowerCase().indexOf(key.toLowerCase()) !== -1  ||
+      producto.stock == key ||
+      producto.categoriaNombre.toLowerCase().indexOf(key.toLowerCase()) !== -1  ||
+      producto.precio == key) {
+        res.push(producto);
+      }
+    }
+    this.productos = res;
+    if (res.length === 0 || !key) {
+      this.productoService.findAll();
+      this.ngOnInit();
+    }
+  
+  }
+
   public onAddProducto(addForm: NgForm): void {
     document.getElementById('add-producto-form')?.click();
     this.productoService.addProducto(addForm.value).subscribe(

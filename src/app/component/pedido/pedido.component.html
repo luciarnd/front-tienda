@@ -1,6 +1,10 @@
 <div class="pedido-container">
     <div class="cabecera-pedido">
         <h2>Pedidos</h2>
+        <div id="buscar">
+          <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+          id="searchName"/>
+         </div>
         <button (click)="abrirModal(null,'add')" class="btn-linea-azul"><i class="fa fa-plus fa-xs"></i></button>
     </div>
     <table>
@@ -11,7 +15,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 10, currentPage: page} | orderBy: 'asc':'id'" id="tbody">
             <td>{{pedido.id}}</td>
             <td>{{pedido.fecha | date:'dd-MM-yyyy'}}</td>
             <td>{{pedido.clienteNombre}} {{pedido.clienteApellido1}}</td>
@@ -29,7 +33,7 @@
         <span (click)="cerrar('delete')" class="close" title="Close Modal">&times;</span>
         <h5>¿Seguro que quieres eliminar el pedido {{deletePedido?.id}}?</h5>
         <div class="clearfix">
-          <button type="button" (click)="onDeleteCliente(deletePedido.id)"
+          <button type="button" (click)="onDeletePedido(deletePedido.id)"
             onclick="document.getElementById('id01').style.display='none'" class="btn-rojo">Eliminar</button>
         </div>
       </div>
@@ -52,7 +56,7 @@
                             <option *ngFor="let cliente of clientes" value="{{cliente.id}}">{{cliente.nombre}} {{cliente.apellido1}}</option>
             </select>
          </div>
-        <button (click)="onUpdateCliente(updatePedido)" onclick="document.getElementById('id02').style.display='none'"
+        <button (click)="onUpdatePedido(updatePedido)" onclick="document.getElementById('id02').style.display='none'"
           class="btn-azul">Editar</button>
       </form>
     </div>
@@ -62,28 +66,19 @@
   <div id="id03" class="modal">
     <div class="modal-content">
       <span class="close" (click)="cerrar('add')">&times;</span>
-      <h5>Añadir Cliente</h5>
-      <form #addForm="ngForm" (ngSubmit)="onAddCliente(addForm)">
+      <h5>Añadir Pedido</h5>
+      <form #addForm="ngForm" (ngSubmit)="onAddPedido(addForm)">
         <div class="form-group">
-          <label for="dni">DNI</label>
-          <input type="text" ngModel name="dni" class="form-control" id="dni">
+          <label for="fecha">Fecha</label>
+          <input type="date" ngModel name="fecha" class="form-control" id="fecha" placeholder="Fecha">
         </div>
         <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" ngModel name="nombre" class="form-control" id="nombre">
-        </div>
-        <div class="form-group">
-          <label for="apellido1">Primer Apellido</label>
-          <input type="text" ngModel name="apellido1" class="form-control" id="apellido1">
-        </div>
-        <div class="form-group">
-          <label for="apellido2">Segundo Apellido</label>
-          <input type="text" ngModel name="apellido2" class="form-control" id="apellido2">
-        </div>
-        <div class="form-group">
-          <label for="telefono">Telefono</label>
-          <input type="text" ngModel name="telefono" class="form-control" id="telefono">
-        </div>
+          <label for="cliente">Cliente<span id="obligatorio"> *</span></label>
+          <select ngModel name="cliente" class="form-control form-select" id="cliente">
+                          <option selected>Elige el cliente</option>
+                          <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">{{cliente.nombre}} {{cliente.apellido1}}</option>
+          </select>
+       </div>
         <button [disabled]="addForm.invalid" type="submit"
           onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
       </form>

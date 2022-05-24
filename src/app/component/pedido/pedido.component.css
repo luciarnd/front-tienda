@@ -2,10 +2,16 @@
     padding: 15px;
 }
 
-h2 {
-    display: inline;
-    margin: 0 0 20px 0;
-  }
+.cabecera-pedido {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+#buscar {
+  width: 20%;
+}
+
 
 table {
     width: 100%;
@@ -188,7 +194,6 @@ td {
     padding-bottom: 15px;
   }
 
-
   
   .close:hover,
   .close:focus {
@@ -202,10 +207,8 @@ td {
     clear: both;
     display: table;
   }
-  
-  
-  @media screen and (max-width: 300px) {
-    .cancelbtn, .deletebtn {
-       width: 100%;
-    }
-  }
+
+
+  .form-control {
+    border-color: #007bff;
+}

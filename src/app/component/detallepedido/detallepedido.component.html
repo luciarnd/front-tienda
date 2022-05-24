@@ -1,6 +1,10 @@
 <div class="detallepedido-container">
     <div class="cabecera-detallepedido">
         <h2>Detalles de Pedidos</h2>
+        <div id="buscar">
+            <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+            id="searchName"/>
+        </div>
     </div>
     <table>
         <tr>
@@ -13,7 +17,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let detallepedido of detallepedidos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let detallepedido of detallepedidos | paginate: {itemsPerPage: 10, currentPage: page} | orderBy: 'asc':'id'" id="tbody">
             <td>{{detallepedido.id}}</td>
             <td>{{detallepedido.cantidad}}</td>
             <td>{{detallepedido.precio_unidad}}</td>

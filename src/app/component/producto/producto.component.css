@@ -61,7 +61,9 @@ td {
     vertical-align: middle;
 }
 
-
+#buscar {
+    width: 20%;
+}
 
 
 .paginator ::ng-deep .ngx-pagination a:hover,

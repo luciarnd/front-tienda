@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Cliente } from 'src/app/model/cliente';
 import { Pedido } from 'src/app/model/pedido';
+import { PedidoDTO } from 'src/app/model/pedidoDTO';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -14,7 +15,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class PedidoComponent implements OnInit {
 
-  pedidos: Pedido[];
+  pedidos: PedidoDTO[];
   deletePedido: Pedido;
   updatePedido: Pedido;
   clientes: Cliente[];
@@ -30,6 +31,25 @@ export class PedidoComponent implements OnInit {
     this.clienteService.findAll().subscribe(data => {
       this.clientes = data;
     });
+  }
+
+  public search(key: any): void {
+    console.log(key);
+    const res: PedidoDTO[] = [];
+    for (const pedido of this.pedidos) {
+      if(pedido.fecha == key ||
+        pedido.clienteNombre.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        pedido.clienteApellido1.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        pedido.clienteNombre + " " + pedido.clienteApellido1 == key) {
+        res.push(pedido);
+      }
+    }
+    this.pedidos = res;
+    if (res.length === 0 || !key) {
+      this.pedidoService.findAll();
+      this.ngOnInit();
+    }
+  
   }
 
   public abrirModal(pedido: Pedido | null, mode:string){
@@ -62,8 +82,9 @@ export class PedidoComponent implements OnInit {
     }
   }
 
-  public onAddCliente(addForm: NgForm): void {
+  public onAddPedido(addForm: NgForm): void {
     // document.getElementById('addForm')?.click();
+    console.log(addForm.value);
     this.pedidoService.addPedido(addForm.value).subscribe(
       (response: Pedido) => {
         console.log(response);
@@ -78,7 +99,7 @@ export class PedidoComponent implements OnInit {
     );
   }
 
-  public onUpdateCliente(pedido: Pedido): void {
+  public onUpdatePedido(pedido: Pedido): void {
     this.pedidoService.updatePedido(pedido).subscribe(
       (response: Pedido) => {
         console.log(response);
@@ -91,7 +112,7 @@ export class PedidoComponent implements OnInit {
     );
   }
 
-  public onDeleteCliente(clienteid: number): void{
+  public onDeletePedido(clienteid: number): void{
     this.pedidoService.deletePedido(clienteid).subscribe((response: Pedido)=>{
       console.log(response);
       this.pedidoService.findAll();
@@ -101,5 +122,6 @@ export class PedidoComponent implements OnInit {
     alert(error.message);
   })
   }
+
 
 }

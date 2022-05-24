@@ -4,12 +4,17 @@
 
 h2 {
   display: inline;
-  margin: 0 0 20px 0;
+  margin-right: 15px;
 }
 
 .cabecera-cliente {
+  margin: 15px 0;
   display: flex;
   justify-content: space-between;
+}
+
+#buscar {
+  width: 20%;
 }
 
 table {
@@ -107,7 +112,7 @@ td {
     background-color: #fefefe;
     margin: 1% auto 0 auto; 
     border: 1px solid #888;
-    width: 60%; 
+    width: 40%; 
     padding: 20px
   }
   
@@ -153,6 +158,10 @@ td {
     content: "";
     clear: both;
     display: table;
+  }
+
+  .form-control {
+    border-color: #007bff
   }
   
   
@@ -208,4 +217,12 @@ td {
     border-radius: 0;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+#obligatorio {
+  color: red;
+}
+
+.campoObligatorio {
+  font-size: 13px;
 }

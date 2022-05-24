@@ -24,6 +24,27 @@ export class ClienteComponent implements OnInit {
       this.clientes = data;
     });
   }
+
+  public search(key: any): void {
+    console.log(key);
+    const res: Cliente[] = [];
+    for (const cliente of this.clientes) {
+      if(cliente.dni.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+      cliente.nombre.toLowerCase().indexOf(key.toLowerCase()) !== -1  ||
+      cliente.apellido1.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+      cliente.apellido2.toLowerCase().indexOf(key.toLowerCase()) !== -1  ||
+      cliente.telefono.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        res.push(cliente);
+      }
+    }
+    this.clientes = res;
+    if (res.length === 0 || !key) {
+      this.clienteService.findAll();
+      this.ngOnInit();
+    }
+  
+  }
+
   public abrirModal(cliente: Cliente | null, mode:string){
     if(mode === 'delete'){
       document.getElementById('id01').style.display='block';

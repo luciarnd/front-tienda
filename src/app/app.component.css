@@ -9,6 +9,10 @@ ul {
 #nav {
     background-color: rgb(32, 32, 32);
     display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
 }
 
 .nav-titulo {
@@ -48,10 +52,6 @@ ul {
 }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
     background-color: rgb(32, 32, 32);
     color: white;
     text-align: center;
@@ -77,3 +77,4 @@ footer p {
         margin-bottom: 15px;
     }
 }
+

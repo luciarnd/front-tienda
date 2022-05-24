@@ -6,6 +6,10 @@
                 <i class="fa fa-plus fa-xs"></i>
             </a>
         </div>
+        <div id="buscar">
+         <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+         id="searchName"/>
+        </div>
         <div id="descarga">
             <a (click)="descargarExcel()" class="btn btn-outline-primary tooltips"><span>Descargar Excel</span></a>
         </div>
@@ -21,7 +25,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let producto of productos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let producto of productos | paginate: {itemsPerPage: 10, currentPage: page} | orderBy: 'asc':'id'" id="tbody">
             <td>{{producto.id}}</td>
             <td>{{producto.nombre}}</td>
             <td>{{producto.descripcion}}</td>
