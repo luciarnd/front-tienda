@@ -86,11 +86,8 @@ export class ClienteComponent implements OnInit {
     },
     (error: HttpErrorResponse) => {
     alert(error.message);
+  })
   }
-    )
-  }
-
-
 
 
 

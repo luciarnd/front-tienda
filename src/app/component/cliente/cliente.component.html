@@ -1,6 +1,6 @@
-<div class="pedido-container">
+<div class="cliente-container">
   <div>
-    <div class="cabecera-pedido">
+    <div class="cabecera-cliente">
       <h2>Clientes</h2>
     </div>
     <table>
@@ -28,7 +28,7 @@
     <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
     </pagination-controls>
   </div>
-</div>
+
 <div id="id01" class="modal">
   <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
   <form class="modal-content">
@@ -45,8 +45,7 @@
 
 
 <div id="id02" class=" modal">
-  <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" *ngIf="updateCliente">
     <span class="close">&times;</span>
     <p>Edita el cliente {{updateCliente.nombre}}</p>
     <form #editForm="ngForm">
@@ -54,10 +53,11 @@
         <label for="dni">DNI</label>
         <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni">
       </div>
-      <button type="button"  (click)="cerrar('edit')" class="btn btn-secondary">Close</button>
+      <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Close</button>
       <button (click)="onUpdateCliente(updateCliente)" data-dismiss="modal" class="btn btn-primary">Save
         changes</button>
     </form>
   </div>
 
+</div>
 </div>

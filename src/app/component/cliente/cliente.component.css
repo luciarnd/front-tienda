@@ -1,4 +1,4 @@
-.pedido-container {
+.cliente-container {
     padding: 15px;
 }
 
@@ -104,7 +104,7 @@ td {
   }
   
 
-  .container {
+  .cliente-container {
     padding: 16px;
     text-align: center;
   }
