@@ -2,6 +2,7 @@
   <div>
     <div class="cliente-pedido">
       <h2>Clientes</h2>
+      <button (click)="abrirModal(null,'add')"><i class="fa fa-plus"></i></button>
     </div>
     <table>
       <tr>
@@ -27,25 +28,25 @@
     </table>
     <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
     </pagination-controls>
-
   </div>
+
+  <!-- Delete modal -->
   <div id="id01" class="modal">
     <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
     <form class="modal-content">
       <div class="container">
         <p>Seguro que queres eliminar al cliente {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}</p>
         <div class="clearfix">
-          <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cancel</button>
+          <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cerrar</button>
           <button type="button" (click)="onDeleteCliente(deleteCliente.id)"
-            onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+            onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Eliminar</button>
         </div>
       </div>
     </form>
   </div>
 
-
-  <div id="id02" class=" modal">
-    <!-- Modal content -->
+<!-- Edit Modal -->
+  <div id="id02" class="modal">
     <div class="modal-content" *ngIf="updateCliente">
       <span class="close">&times;</span>
       <p>Edita el cliente {{updateCliente.nombre}}</p>
@@ -70,11 +71,42 @@
           <label for="telefono">Telefono</label>
           <input type="text" [(ngModel)]="updateCliente.telefono" name="telefono" class="form-control" id="telefono">
         </div>
-        <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Close</button>
-        <button (click)="onUpdateCliente(updateCliente)"  onclick="document.getElementById('id02').style.display='none'" class="btn btn-primary">Save
-          changes</button>
+        <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Cerrar</button>
+        <button (click)="onUpdateCliente(updateCliente)" onclick="document.getElementById('id02').style.display='none'"
+          class="btn btn-primary">Editar</button>
       </form>
     </div>
-
   </div>
-</div>
+
+<!-- Add modal -->
+  <div id="id03" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Añade un nuevo cliente</p>
+      <form #addForm="ngForm" (ngSubmit)="onAddCliente(addForm)">
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input type="text" ngModel name="dni" class="form-control" id="dni">
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" ngModel name="nombre" class="form-control" id="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido1">Apellido1</label>
+          <input type="text" ngModel name="apellido1" class="form-control" id="apellido1">
+        </div>
+        <div class="form-group">
+          <label for="apellido2">Apellido2</label>
+          <input type="text" ngModel name="apellido2" class="form-control" id="apellido2">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input type="text" ngModel name="telefono" class="form-control" id="telefono">
+        </div>
+        <button type="button" (click)="cerrar('add')" class="btn btn-secondary">Cerrar</button>
+        <button [disabled]="addForm.invalid" type="submit"
+          onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
+      </form>
+    </div>
+  </div>
