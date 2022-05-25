@@ -36,8 +36,9 @@ export class PedidoComponent implements OnInit {
     console.log(key);
     const res: Pedido[] = [];
     for (const pedido of this.pedidos) {
-      if(pedido.fecha == key ||
-        pedido.clienteNombreCompleto.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+      let fullName = pedido.clienteNombre + " " +pedido.clienteApellido1;
+      if(pedido.fecha == key || 
+        fullName.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         res.push(pedido);
       }
     }

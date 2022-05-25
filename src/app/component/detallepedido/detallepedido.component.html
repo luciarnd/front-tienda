@@ -5,9 +5,9 @@
             <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
             id="searchName"/>
         </div>
-        <a (click)="abrirModal(null!, 'add')" class="btn-linea-azul">
+        <button (click)="abrirModal(null!, 'add')" class="btn-linea-azul">
             <i class="fa fa-plus fa-xs"></i>
-        </a>
+        </button>
     </div>
     <table>
         <tr>
@@ -31,7 +31,7 @@
             <td><button (click)="abrirModal(detallepedido, 'delete')" class="btn-rojo-sm"><i class="fa fa-trash fa-xs"></i></button></td>
         </tr>
     </table>
-</div>
+
 
 <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
 
@@ -44,7 +44,7 @@
           <button type="button" (click)="onDeleteProducto(deleteDetallePedido.id)"
             onclick="document.getElementById('id01').style.display='none'" class="btn-rojo">Eliminar</button>
         </div>
-      </div>
+        </div>
     </form>
   </div>
  
@@ -67,14 +67,14 @@
           <label for="pedidoId">Pedido<span id="obligatorio"> *</span></label>
           <select ngModel name="pedidoId" class="form-control form-select" id="pedidoId">
              <option selected [(ngModel)]="updateDetallePedido.pedidoId">{{updateDetallePedido.pedidoId}}</option>
-             <option *ngFor="let pedido of pedidos">{{pedido.id}}</option>
+             <option *ngFor="let pedido of pedidos" [ngValue]="pedido.id">{{pedido.id}}</option>
           </select>
         </div>
         <div class="form-group">
-            <label for="productoNombre">Producto<span id="obligatorio"> *</span></label>
-            <select ngModel name="productoNombre" class="form-control form-select" id="productoNombre">
-               <option selected [(ngModel)]="updateDetallePedido.productoNombre">{{updateDetallePedido.productoNombre}}</option>
-               <option *ngFor="let producto of productos">{{producto.nombre}}</option>
+            <label for="productoId">Producto<span id="obligatorio"> *</span></label>
+            <select ngModel name="productoId" class="form-control form-select" id="productoId">
+               <option selected>{{updateDetallePedido?.productoNombre}}</option>
+               <option *ngFor="let producto of productos" [ngValue]="producto.id">{{producto.nombre}}</option>
             </select>
           </div>
         <div class="campoObligatorio">
@@ -108,18 +108,18 @@
             </select>
           </div>
           <div class="form-group">
-              <label for="productoNombre">Producto<span id="obligatorio"> *</span></label>
-              <select ngModel name="productoNombre" class="form-control form-select" id="productoNombre">
+              <label for="productoId">Producto<span id="obligatorio"> *</span></label>
+              <select ngModel name="productoId" class="form-control form-select" id="productoId">
                  <option selected>Elige Producto</option>
-                 <option *ngFor="let producto of productos">{{producto.nombre}}</option>
+                 <option *ngFor="let producto of productos" [ngValue]="producto.id">{{producto.nombre}}</option>
               </select>
             </div>
           <div class="campoObligatorio">
             <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
           </div>
-        <button [disabled]="addForm.invalid" type="submit"
+          <button [disabled]="addForm.invalid" type="submit"
           onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
       </form>
-    </div>
-  </div>
+      </div>
+  </div> 
 

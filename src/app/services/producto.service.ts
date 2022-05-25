@@ -11,9 +11,11 @@ export class ProductoService {
   private apiBaseUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) {
    }
+
    public findAll(): Observable<Producto[]>{
     return this.http.get<Producto[]>(`${this.apiBaseUrl}/producto/all`);
-  }
+   }
+
   public updateProducto(producto: Producto): Observable<Producto>{
     return this.http.put<Producto>(`${this.apiBaseUrl}/producto/update`, producto)
   }

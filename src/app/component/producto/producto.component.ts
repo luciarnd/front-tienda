@@ -100,6 +100,7 @@ export class ProductoComponent implements OnInit {
   }
 
   public onUpdateProducto(producto: Producto): void {
+    console.log(producto);
     this.productoService.updateProducto(producto).subscribe(
       (response: Producto) => {
         console.log(response);

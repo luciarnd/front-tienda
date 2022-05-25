@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DetallePedido } from 'src/app/model/detallepedido';
 import { Pedido } from 'src/app/model/pedido';
+import { PedidoService } from 'src/app/services/pedido.service';
 import { Producto } from 'src/app/model/producto';
 import { DetallePedidoService } from 'src/app/services/detalle-pedido.service';
-import { PedidoService } from 'src/app/services/pedido.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -22,23 +22,24 @@ export class DetallepedidoComponent implements OnInit {
   productos: Producto[];
   page: number = 1;
 
-  constructor(private detallePedidoService: DetallePedidoService, private pedidosService: PedidoService, private productoService: ProductoService) { }
+
+  constructor(private detallePedidoService: DetallePedidoService, private productosService: ProductoService, private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     this.detallePedidoService.findAll().subscribe(data => {
       this.detallepedidos = data;
     });
 
-    this.pedidosService.findAll().subscribe(data => {
+    this.pedidoService.findAll().subscribe(data => {
       this.pedidos= data;
     });
 
-    this.productoService.findAll().subscribe(data => {
+    this.productosService.findAll().subscribe(data => {
       this.productos= data;
     })
-  
-  }
 
+  }
+  
   public search(key: any): void {
     console.log(key);
     const res: DetallePedido[] = [];
@@ -102,6 +103,7 @@ export class DetallepedidoComponent implements OnInit {
   }
 
   public onUpdateDetallePedido(detallePedido: DetallePedido): void {
+    console.log(detallePedido);
     this.detallePedidoService.updateDetallePedido(detallePedido).subscribe(
       (response: DetallePedido) => {
         console.log(response);
@@ -126,6 +128,5 @@ export class DetallepedidoComponent implements OnInit {
     }
     );
   }
-
 
 }

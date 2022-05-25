@@ -13,7 +13,6 @@ export class DetallePedidoService {
 
   constructor(private http: HttpClient) {
    }
-
    public findAll(): Observable<DetallePedido[]>{
      return this.http.get<DetallePedido[]>(`${this.apiBaseUrl}/detallepedido/all`);
    }

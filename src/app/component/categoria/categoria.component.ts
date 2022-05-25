@@ -11,9 +11,10 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 })
 export class CategoriaComponent implements OnInit {
 
-  categorias: Categoria[];
   updateCategoria: Categoria;
   deleteCategoria: Categoria;
+  categorias: Categoria[];
+
   page: number = 1;
 
   constructor(private categoriaService: CategoriaService) { }
@@ -41,7 +42,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   public onAddCategoria(addForm: NgForm): void {
-    document.getElementById('add-categoria-form')?.click();
+    // document.getElementById('add-categoria-form')?.click();
     this.categoriaService.addCategoria(addForm.value).subscribe(
       (response: Categoria) => {
         console.log(response);
@@ -82,29 +83,33 @@ export class CategoriaComponent implements OnInit {
     );
   }
 
-  public onOpenModal(categoria: Categoria, mode: string): void {
-    const container = document.getElementById('categoria-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal'); 
-
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addCategoriaModal');
+  public abrirModal(categoria: Categoria | null, mode:string){
+    if(mode === 'delete'){
+      document.getElementById('id01').style.display='block';
+      this.deleteCategoria=categoria;
+     
     }
+     if(mode === 'edit'){
+      document.getElementById('id02').style.display='block';
+        this.updateCategoria=categoria;
+     }
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='block';
+      console.log("Entro");
+     }
 
-    if (mode === 'edit') {
-      this.updateCategoria = categoria;
-      button.setAttribute('data-target', '#updateCategoriaModal');
+  }
+
+  public cerrar(mode: string){
+    if (mode === 'delete'){
+      document.getElementById('id01').style.display='none';
     }
-
-    if (mode === 'delete') {
-      this.deleteCategoria = categoria;
-      button.setAttribute('data-target', '#deleteCategoriaModal');
+    if (mode ==='edit'){
+      document.getElementById('id02').style.display='none';
     }
-    container!.appendChild(button);
-    button.click();
-
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='none';
+    }
   }
 
 }

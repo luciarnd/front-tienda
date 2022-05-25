@@ -25,6 +25,8 @@ export class ClienteComponent implements OnInit {
     });
   }
 
+
+
   public search(key: any): void {
     console.log(key);
     const res: Cliente[] = [];
@@ -58,7 +60,7 @@ export class ClienteComponent implements OnInit {
     if(mode === 'add'){
       document.getElementById('id03').style.display='block';
       console.log("Entro");
-      cliente=null;
+      
      }
 
   }

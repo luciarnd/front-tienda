@@ -18,7 +18,7 @@
         <tr *ngFor="let pedido of pedidos | paginate: {itemsPerPage: 10, currentPage: page} | orderBy: 'asc':'id'" id="tbody">
             <td>{{pedido.id}}</td>
             <td>{{pedido.fecha | date:'dd-MM-yyyy'}}</td>
-            <td>{{pedido.clienteNombreCompleto}}</td>
+            <td>{{pedido.clienteNombre}} {{pedido.clienteApellido1}}</td>
             <td><button (click)="abrirModal(pedido,'edit')" class="btn-azul-sm"><i class="fa fa-pen fa-xs"></i></button></td>
             <td><button (click)="abrirModal(pedido,'delete')" class="btn-rojo-sm"><i class="fa fa-trash fa-xs"></i></button></td>
         </tr>
@@ -52,10 +52,10 @@
           <input type="date" [(ngModel)]="updatePedido.fecha" name="fecha" class="form-control" id="fecha">
         </div>
         <div class="form-group">
-            <label for="clienteNombreCompleto">Cliente<span id="obligatorio"> *</span></label>
-            <select ngModel name="clienteNombreCompleto" class="form-control form-select" id="clienteNombreCompleto">
-                            <option selected [(ngModel)]="updatePedido.clienteNombreCompleto"></option>
-                            <option *ngFor="let cliente of clientes">{{cliente.nombre}} {{cliente.apellido1}}</option>
+            <label for="clienteId">Cliente<span id="obligatorio"> *</span></label>
+            <select ngModel name="clienteId" class="form-control form-select" id="clienteId">
+                            <option selected [(ngModel)]="updatePedido.clienteNombre"></option>
+                            <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">{{cliente.nombre}} {{cliente.apellido1}}</option>
             </select>
          </div>
          <div class="campoObligatorio">
@@ -78,10 +78,10 @@
           <input type="date" ngModel name="fecha" class="form-control" id="fecha" placeholder="Fecha">
         </div>
         <div class="form-group">
-          <label for="clienteNombreCompleto">Cliente<span id="obligatorio"> *</span></label>
-          <select ngModel name="clienteNombreCompleto" class="form-control form-select" id="clienteNombreCompleto">
+          <label for="clienteId">Cliente<span id="obligatorio"> *</span></label>
+          <select ngModel name="clienteId" class="form-control form-select" id="clienteId">
                           <option selected>Elige el cliente</option>
-                          <option *ngFor="let cliente of clientes">{{cliente.nombre}} {{cliente.apellido1}}</option>
+                          <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">{{cliente.nombre}} {{cliente.apellido1}}</option>
           </select>
        </div>
        <div class="campoObligatorio">

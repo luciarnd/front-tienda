@@ -77,8 +77,8 @@
          <input type="number" [(ngModel)]="updateProducto.stock" name="stock" class="form-control" id="stock" min="0" required>
        </div>
        <div class="form-group">
-         <label for="categoriaNombre">Categoría<span id="obligatorio"> *</span></label>
-         <select ngModel name="categoriaNombre" class="form-control form-select" id="categoriaNombre">
+         <label for="categoriaId">Categoría<span id="obligatorio"> *</span></label>
+         <select ngModel name="categoriaId" class="form-control form-select" id="categoriaId">
             <option selected [(ngModel)]="updateProducto.categoriaNombre">{{updateProducto.categoriaNombre}}</option>
             <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nombre}}</option>
          </select>
