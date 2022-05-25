@@ -6,7 +6,6 @@ import * as FileSaver from 'file-saver';
 import { NgForm } from '@angular/forms';
 import { Categoria } from 'src/app/model/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import { ProductoDTO } from 'src/app/model/productoDTO';
 
 @Component({
   selector: 'app-producto',
@@ -15,7 +14,7 @@ import { ProductoDTO } from 'src/app/model/productoDTO';
 })
 export class ProductoComponent implements OnInit {
   
-  productos: ProductoDTO[];
+  productos: Producto[];
   categorias: Categoria[];
   updateProducto: Producto;
   deleteProducto: Producto;
@@ -35,7 +34,7 @@ export class ProductoComponent implements OnInit {
 
   public search(key: any): void {
     console.log(key);
-    const res: ProductoDTO[] = [];
+    const res: Producto[] = [];
     for (const producto of this.productos) {
       if(producto.nombre.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
       producto.descripcion.toLowerCase().indexOf(key.toLowerCase()) !== -1  ||
@@ -51,6 +50,36 @@ export class ProductoComponent implements OnInit {
       this.ngOnInit();
     }
   
+  }
+
+  public abrirModal(producto: Producto | null, mode:string){
+    if(mode === 'delete'){
+      document.getElementById('id01').style.display='block';
+      this.deleteProducto=producto;
+     
+    }
+     if(mode === 'edit'){
+      document.getElementById('id02').style.display='block';
+        this.updateProducto=producto;
+     }
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='block';
+      console.log("Entro");
+      producto=null;
+     }
+
+  }
+
+  public cerrar(mode: string){
+    if (mode === 'delete'){
+      document.getElementById('id01').style.display='none';
+    }
+    if (mode ==='edit'){
+      document.getElementById('id02').style.display='none';
+    }
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='none';
+    }
   }
 
   public onAddProducto(addForm: NgForm): void {
@@ -82,7 +111,7 @@ export class ProductoComponent implements OnInit {
     );
   }
 
-  public onDeleteCategoria(productoid: number): void {
+  public onDeleteProducto(productoid: number): void {
     this.productoService.deleteProducto(productoid).subscribe(
       (response: Producto) => {
         console.log(response);
@@ -93,31 +122,6 @@ export class ProductoComponent implements OnInit {
       alert(error.message);
     }
     );
-  }
-
-  public onOpenModal(producto: Producto, mode: string): void {
-    const container = document.getElementById('producto-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal'); 
-
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addProductoModal');
-    }
-
-    if (mode === 'edit') {
-      this.updateProducto = producto;
-      button.setAttribute('data-target', '#updateProductoModal');
-    }
-
-    if (mode === 'delete') {
-      this.deleteProducto = producto;
-      button.setAttribute('data-target', '#deleteProductoModal');
-    }
-    container!.appendChild(button);
-    button.click();
-
   }
 
   descargarExcel() {

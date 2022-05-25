@@ -53,6 +53,8 @@
       <span (click)="cerrar('edit')" class="close" title="Close Modal">&times;</span>
       <h5>Editar Cliente: {{updateCliente.nombre}}</h5>
       <form #editForm="ngForm">
+        <input type="hidden" ngModel="{{updateCliente?.id}}" name="id" class="form-control" id="id"
+                            placeholder="id">
         <div class="form-group">
           <label for="dni">DNI<span id="obligatorio"> *</span></label>
           <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni" required>

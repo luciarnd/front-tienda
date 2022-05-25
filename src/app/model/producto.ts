@@ -6,5 +6,5 @@ export class Producto {
     descripcion: string
     precio: number;
     stock: number;
-    categoria: Categoria;
+    categoriaNombre: string;
 }

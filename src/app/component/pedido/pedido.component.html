@@ -48,16 +48,19 @@
         <input type="hidden" ngModel="{{updatePedido?.id}}" name="id" class="form-control" id="id"
                             placeholder="id">
         <div class="form-group">
-          <label for="fecha">Fecha</label>
+          <label for="fecha">Fecha<span id="obligatorio"> *</span></label>
           <input type="date" [(ngModel)]="updatePedido.fecha" name="fecha" class="form-control" id="fecha">
         </div>
         <div class="form-group">
-            <label for="clienteNombreCompleto">Cliente</label>
+            <label for="clienteNombreCompleto">Cliente<span id="obligatorio"> *</span></label>
             <select ngModel name="clienteNombreCompleto" class="form-control form-select" id="clienteNombreCompleto">
                             <option selected [(ngModel)]="updatePedido.clienteNombreCompleto"></option>
                             <option *ngFor="let cliente of clientes">{{cliente.nombre}} {{cliente.apellido1}}</option>
             </select>
          </div>
+         <div class="campoObligatorio">
+          <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+        </div>
         <button (click)="onUpdatePedido(editForm.value)" onclick="document.getElementById('id02').style.display='none'"
           class="btn-azul">Editar</button>
       </form>
@@ -71,7 +74,7 @@
       <h5>Añadir Pedido</h5>
       <form #addForm="ngForm" (ngSubmit)="onAddPedido(addForm)">
         <div class="form-group">
-          <label for="fecha">Fecha</label>
+          <label for="fecha">Fecha<span id="obligatorio"> *</span></label>
           <input type="date" ngModel name="fecha" class="form-control" id="fecha" placeholder="Fecha">
         </div>
         <div class="form-group">
@@ -81,6 +84,9 @@
                           <option *ngFor="let cliente of clientes">{{cliente.nombre}} {{cliente.apellido1}}</option>
           </select>
        </div>
+       <div class="campoObligatorio">
+        <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+      </div>
         <button [disabled]="addForm.invalid" type="submit"
           onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
       </form>

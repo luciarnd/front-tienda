@@ -212,3 +212,11 @@ td {
   .form-control {
     border-color: #007bff;
 }
+
+#obligatorio {
+  color: red;
+}
+
+.campoObligatorio {
+  font-size: 13px;
+}
