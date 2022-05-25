@@ -10,7 +10,6 @@ import { PedidoService } from './services/pedido.service';
 import { ProductoService } from './services/producto.service';
 import { ProductoDTO } from './model/productoDTO';
 import { Pedido } from './model/pedido';
-import { PedidoDTO } from './model/pedidoDTO';
 
 
 @Component({
@@ -21,7 +20,7 @@ import { PedidoDTO } from './model/pedidoDTO';
 
 export class AppComponent {
   title = 'Tienda';
-  pedidos: PedidoDTO[];
+  pedidos: Pedido[];
   productos: ProductoDTO[];
   detallePedidos: DetallePedido[];
   categorias: Categoria[];

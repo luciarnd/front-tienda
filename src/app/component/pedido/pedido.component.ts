@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Cliente } from 'src/app/model/cliente';
 import { Pedido } from 'src/app/model/pedido';
-import { PedidoDTO } from 'src/app/model/pedidoDTO';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -15,7 +14,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class PedidoComponent implements OnInit {
 
-  pedidos: PedidoDTO[];
+  pedidos: Pedido[];
   deletePedido: Pedido;
   updatePedido: Pedido;
   clientes: Cliente[];
@@ -35,12 +34,10 @@ export class PedidoComponent implements OnInit {
 
   public search(key: any): void {
     console.log(key);
-    const res: PedidoDTO[] = [];
+    const res: Pedido[] = [];
     for (const pedido of this.pedidos) {
       if(pedido.fecha == key ||
-        pedido.clienteNombre.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        pedido.clienteApellido1.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        pedido.clienteNombre + " " + pedido.clienteApellido1 == key) {
+        pedido.clienteNombreCompleto.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         res.push(pedido);
       }
     }
@@ -112,8 +109,8 @@ export class PedidoComponent implements OnInit {
     );
   }
 
-  public onDeletePedido(clienteid: number): void{
-    this.pedidoService.deletePedido(clienteid).subscribe((response: Pedido)=>{
+  public onDeletePedido(pedidoid: number): void{
+    this.pedidoService.deletePedido(pedidoid).subscribe((response: Pedido)=>{
       console.log(response);
       this.pedidoService.findAll();
       this.ngOnInit();
