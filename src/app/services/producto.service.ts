@@ -12,6 +12,9 @@ export class ProductoService {
   private apiBaseUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) {
    }
+   public findAll1(): Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.apiBaseUrl}/producto/all`);
+  }
    public findAll(): Observable<ProductoDTO[]>{
     return this.http.get<ProductoDTO[]>(`${this.apiBaseUrl}/producto/all`);
   }

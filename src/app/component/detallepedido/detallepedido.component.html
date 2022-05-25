@@ -1,6 +1,7 @@
 <div class="detallepedido-container">
     <div class="cabecera-detallepedido">
         <h2>Detalles de Pedidos</h2>
+        <button (click)="abrirModal(null,'add')"><i class="fa fa-plus"></i></button>
     </div>
     <table>
         <tr>
@@ -20,12 +21,88 @@
             <td>{{detallepedido.precio_unidad * detallepedido.cantidad}}</td>
             <td>{{detallepedido.pedidoId}}</td>
             <td>{{detallepedido.productoNombre}}</td>
-            <td></td>
-            <td></td>
+            <td><button (click)="abrirModal(detallepedido,'edit')"><i class="fa fa-pen"></i></button></td>
+        <td><button (click)="abrirModal(detallepedido,'delete')"><i class="fa fa-trash"></i></button></td>
         </tr>
     </table>
-</div>
+
 
 <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
+
+  <!-- Delete modal -->
+  <div id="id01" class="modal">
+    <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
+    <form class="modal-content">
+      <div class="container">
+        <p>Seguro que quieres eleiminar el detallepedido {{deleteDP?.id}}</p>
+        <div class="clearfix">
+          <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cerrar</button>
+          <button type="button" (click)="onDeleteCliente(deleteDP.id)"
+            onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Eliminar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="id02" class="modal">
+    <div class="modal-content" *ngIf="updateDP">
+      <span (click)="cerrar('edit')" class="close">&times;</span>
+      <p>Edita el detallepedido {{updateDP.id}}</p>
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" [(ngModel)]="updateDP.cantidad" name="cantidad" class="form-control" id="cantidad">
+        </div>
+        <div class="form-group">
+          <label for="precio_unidad">Precio_unidad</label>
+          <input type="number" [(ngModel)]="updateDP.precio_unidad" name="precio_unidad" class="form-control" id="precio_unidad">
+        </div>
+        <div class="form-group">
+          <label for="pedidoId">Id de Pedido</label>
+          <input type="number" [(ngModel)]="updateDP.pedidoId" name="pedidoId" class="form-control" id="pedidoId">
+        </div>
+        <div class="form-group">
+          <label for="productoNombre">Nombre de producto</label>
+          <input type="text" [(ngModel)]="updateDP.productoId" name="productoNombre" class="form-control" id="productoNombre">
+        </div>
+        <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Cerrar</button>
+        <button (click)="onUpdateDetallePedido(updateDP)" onclick="document.getElementById('id02').style.display='none'"
+          class="btn btn-primary">Editar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add modal -->
+  <div id="id03" class="modal">
+    <div class="modal-content" >
+      <span (click)="cerrar('add')" class="close">&times;</span>
+      <p>Añade un nuevo detallepedido</p>
+      <form #addForm="ngForm" (ngSubmit)="onAddDetallePedido(addForm)">
+        <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" ngModel name="cantidad" class="form-control" id="cantidad">
+          </div>
+          <div class="form-group">
+            <label for="precio_unidad">Precio_unidad</label>
+            <input type="number" ngModel name="precio_unidad" class="form-control" id="precio_unidad">
+          </div>
+          <div class="form-group">
+            <label for="pedidoId">Id de Pedido</label>
+            <input type="number" ngModel name="pedidoId" class="form-control" id="pedidoId">
+          </div>
+          <div class="form-group">
+            <label for="productoId">Nombre de producto</label>
+            <select id="productoId" ngModel name="productoId">
+                <option *ngFor="let producto of productos1" [ngValue]="producto.value">{{producto.text}}</option>
+            </select>
+          </div>
+        <button type="button" (click)="cerrar('add')" class="btn btn-secondary">Cerrar</button>
+        <button [disabled]="addForm.invalid" type="submit"
+          onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
+      </form>
+    </div>
+  </div>
+</div>  
 
 

@@ -1,4 +1,3 @@
-import { Categoria } from "./categoria";
 
 export class Producto {
     id: number;

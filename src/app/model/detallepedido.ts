@@ -3,5 +3,6 @@ export class DetallePedido {
     cantidad: number;
     precio_unidad: number;
     pedidoId: number;
+    productoId: number;
     productoNombre: string;
 }

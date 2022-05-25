@@ -45,10 +45,10 @@
     </form>
   </div>
 
-<!-- Edit Modal -->
+  <!-- Edit Modal -->
   <div id="id02" class="modal">
     <div class="modal-content" *ngIf="updateCliente">
-      <span class="close">&times;</span>
+      <span (click)="cerrar('edit')" class="close">&times;</span>
       <p>Edita el cliente {{updateCliente.nombre}}</p>
       <form #editForm="ngForm">
         <div class="form-group">
@@ -78,10 +78,10 @@
     </div>
   </div>
 
-<!-- Add modal -->
+  <!-- Add modal -->
   <div id="id03" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span (click)="cerrar('add')" class="close">&times;</span>
       <p>Añade un nuevo cliente</p>
       <form #addForm="ngForm" (ngSubmit)="onAddCliente(addForm)">
         <div class="form-group">
@@ -110,3 +110,4 @@
       </form>
     </div>
   </div>
+</div>  

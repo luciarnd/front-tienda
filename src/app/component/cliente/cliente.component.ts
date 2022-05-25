@@ -24,7 +24,7 @@ export class ClienteComponent implements OnInit {
       this.clientes = data;
     });
   }
-  public abrirModal(cliente: Cliente | null, mode:string){
+  public abrirModal(cliente: Cliente, mode:string){
     if(mode === 'delete'){
       document.getElementById('id01').style.display='block';
       this.deleteCliente=cliente;
@@ -37,7 +37,7 @@ export class ClienteComponent implements OnInit {
     if(mode === 'add'){
       document.getElementById('id03').style.display='block';
       console.log("Entro");
-      cliente=null;
+      
      }
 
   }

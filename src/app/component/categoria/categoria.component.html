@@ -1,7 +1,7 @@
 <div id="categoria-container">
     <div class="cabecera-categoria">
         <h2>Categorias</h2>
-        <a (click)="onOpenModal(null!, 'add')" class="btn btn-outline-primary btn-sm tooltips"><i class="fa fa-plus fa-xs"></i></a>
+        <a (click)="abrirModal(null, 'add')"><i class="fa fa-plus"></i></a>
     </div>
     <table>
         <tr>
@@ -14,95 +14,63 @@
             <td>{{categoria.id}}</td>
             <td>{{categoria.nombre}}</td>
             <td>
-                <a (click)="onOpenModal(categoria, 'edit')" class="btn btn-outline-primary tooltips btn-sm" data-placement="top" data-original-title="Edit">
+                <a (click)="abrirModal(categoria, 'edit')">
                     <i class="fa fa-pen fa-xs"></i>
                 </a>
             </td>
             <td>
-            <a (click)="onOpenModal(categoria, 'delete')" class="btn btn-outline-danger tooltips btn-sm" data-placement="top" data-original-title="Delete">
-                <i class="fa fa-trash fa-xs"  aria-hidden="true"></i>
-            </a>
-        </td>
+                <a (click)="abrirModal(categoria, 'delete')">
+                    <i class="fa fa-trash fa-xs" ></i>
+                </a>
+            </td>
         </tr>
     </table>
-</div>
-
-<pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
 
 
-<div class="modal fade" id="addCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="addCategoriaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title" id="addCategoriaModalLabel">Añadir Categoria</h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-             </button>
-          </div>
-          <div class="modal-body">
-             <form #addForm="ngForm" (ngSubmit)="onAddCategoria(addForm)">
-             <div class="form-group">
-                <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
-                <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
-             </div>
-             <div class="campoObligatorio">
-                <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
-            </div>
-             <div class="modal-footer">
-                <button type="button" id="add-categoria-form" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Guardar</button>
-             </div>
-             </form>
-          </div>
-       </div>
-    </div>
- </div>
- 
- <div class="modal fade" id="updateCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
+    </pagination-controls>
+
+    <!-- Add modal  -->
+    <div id="id03" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateCategoriaModalLabel">Editar Categoria</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <div class="modal-body">
-            <form #editForm="ngForm">
+            <span (click)="cerrar('add')" class="close">&times;</span>
+            <p>Añade una nueva categoria</p>
+            <form #addForm="ngForm" (ngSubmit)="onAddCategoria(addForm)">
                 <div class="form-group">
-                    <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
-                    <input type="text" ngModel="{{updateCategoria?.nombre}}" name="nombre" class="form-control" id="nombre" aria-describedby="emailHelp" placeholder="Nombre" required>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" ngModel name="nombre" class="form-control" id="nombre">
                 </div>
-                <input type="hidden" ngModel="{{updateCategoria?.id}}" name="id" class="form-control" id="id" placeholder="id">
-                <div class="campoObligatorio">
-                    <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                    <button (click)="onUpdateCategoria(editForm.value)" data-dismiss="modal" class="btn btn-primary">Guardar</button>
-                </div>
+                <button type="button" (click)="cerrar('add')">Cerrar</button>
+                <button [disabled]="addForm.invalid" type="submit"
+                    onclick="document.getElementById('id03').style.display='none'">Añadir</button>
             </form>
         </div>
     </div>
+    <!-- Edit modal -->
+    <div id="id02" class="modal">
+        <div class="modal-content" *ngIf="updateCategoria">
+            <span (click)="cerrar('edit')" class="close">&times;</span>
+            <p>Edita la categoria {{updateCategoria.nombre}}</p>
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" [(ngModel)]="updateCategoria.nombre" name="nombre" class="form-control" id="nombre">
+                </div>
+                <button type="button" (click)="cerrar('edit')">Cerrar</button>
+                <button (click)="onUpdateCategoria(updateCategoria)"
+                    onclick="document.getElementById('id02').style.display='none'">Editar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete modal -->
+    <div id="id01" class="modal">
+        <div class="modal-content" *ngIf="deleteCategoria">
+            <span (click)="cerrar('delete')" class="close">&times;</span>
+            <p>Seguro que quieres eliminar la categoria {{deleteCategoria.nombre}}</p>
+                <button type="button" (click)="cerrar('delete')">Cerrar</button>
+                <button (click)="onDeleteCategoria(deleteCategoria.id)" type="submit"
+                    onclick="document.getElementById('id01').style.display='none'">Eliminar</button>
+        </div>
     </div>
 </div>
-<div class="modal fade" id="deleteCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Borrar Categoria</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>¿Seguro que quieres borrar la categoria <strong>"{{deleteCategoria?.nombre}}"</strong>?</p>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button (click)="onDeleteCategoria(deleteCategoria.id)" class="btn btn-danger" data-dismiss="modal">Si</button>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
