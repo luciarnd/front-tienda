@@ -28,20 +28,8 @@ td {
     margin: 15px 0;
 }
 
-.titulo-producto .btn {
-    height: 30px;
-    width: 30px;
-    padding-bottom: 6px;
-}
-
 .cabecera-producto a:hover {
     color: white;
-}
-
-.cabecera-producto .btn i {
-    text-align: center;
-    vertical-align: middle;
-    padding-bottom: 4px;
 }
 
 .titulo-producto h2 {

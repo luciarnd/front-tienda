@@ -87,12 +87,13 @@ export class ProductoComponent implements OnInit {
     this.productoService.addProducto(addForm.value).subscribe(
       (response: Producto) => {
         console.log(response);
+        alert("El producto se ha añadido correctamente.")
         this.productoService.findAll();
         addForm.reset();
         this.ngOnInit();
       },
       (error: HttpErrorResponse) => {
-      alert(error.message);
+      alert("Ha habido un error, inténtelo de nuevo");
       addForm.reset();
     }
     );
