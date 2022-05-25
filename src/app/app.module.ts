@@ -12,6 +12,7 @@ import { SobreNosotrosComponent } from './component/sobre-nosotros/sobre-nosotro
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EmailComponent } from './component/email/email.component';
 import { FormsModule } from '@angular/forms';
+import { OrderByPipe } from './pipe/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     ClienteComponent,
     DetallepedidoComponent,
     SobreNosotrosComponent,
-    EmailComponent
+    EmailComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

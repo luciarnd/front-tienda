@@ -1,7 +1,14 @@
 <div class="detallepedido-container">
     <div class="cabecera-detallepedido">
         <h2>Detalles de Pedidos</h2>
+<<<<<<< HEAD
         <button (click)="abrirModal(null,'add')"><i class="fa fa-plus"></i></button>
+=======
+        <div id="buscar">
+            <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+            id="searchName"/>
+        </div>
+>>>>>>> d849c9535fae7b721909fea45713fc1bb4c7099d
     </div>
     <table>
         <tr>
@@ -14,7 +21,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let detallepedido of detallepedidos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let detallepedido of detallepedidos | paginate: {itemsPerPage: 10, currentPage: page} | orderBy: 'asc':'id'" id="tbody">
             <td>{{detallepedido.id}}</td>
             <td>{{detallepedido.cantidad}}</td>
             <td>{{detallepedido.precio_unidad}}</td>

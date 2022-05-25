@@ -2,12 +2,16 @@
     <div class="cabecera-producto">
         <div class="titulo-producto">
             <h2>Productos</h2>
-            <a (click)="onOpenModal(null!, 'add')" class="btn btn-outline-primary btn-sm tooltips">
+            <a (click)="abrirModal(null!, 'add')" class="btn-linea-azul">
                 <i class="fa fa-plus fa-xs"></i>
             </a>
         </div>
+        <div id="buscar">
+         <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+         id="searchName"/>
+        </div>
         <div id="descarga">
-            <a (click)="descargarExcel()" class="btn btn-outline-primary tooltips"><span>Descargar Excel</span></a>
+            <a (click)="descargarExcel()" class="btn-linea-azul"><span>Descargar Excel</span></a>
         </div>
     </div>
     <table>
@@ -21,64 +25,107 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let producto of productos | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let producto of productos | orderBy: 'asc':'id' | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{producto.id}}</td>
             <td>{{producto.nombre}}</td>
             <td>{{producto.descripcion}}</td>
             <td>{{producto.precio}}</td>
             <td>{{producto.stock}}</td>
             <td>{{producto.categoriaNombre}}</td>
-            <td></td>
-            <td></td>
+            <td><button (click)="abrirModal(producto,'edit')" class="btn-azul-sm"><i class="fa fa-pen fa-xs"></i></button></td>
+            <td><button (click)="abrirModal(producto,'delete')" class="btn-rojo-sm"><i class="fa fa-trash fa-xs"></i></button></td>
         </tr>
     </table>
 </div>
 
 <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator"></pagination-controls>
 
-<div class="modal fade" id="addProductoModal" tabindex="-1" role="dialog" aria-labelledby="addProductoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title" id="addCategoriaModalLabel">Añadir Producto</h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-             </button>
-          </div>
-          <div class="modal-body">
-             <form #addForm="ngForm" (ngSubmit)="onAddProducto(addForm)">
-             <div class="form-group">
-                <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
-                <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
-             </div>
-             <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" ngModel name="descripcion" class="form-control" id="descripcion" placeholder="Descripcion">
-             </div>
-             <div class="form-group">
-                <label for="precio">Precio<span id="obligatorio"> *</span></label>
-                <input type="number" ngModel name="precio" class="form-control" id="precio" placeholder="Precio" required>
-             </div>
-             <div class="form-group">
-                <label for="stock">Stock<span id="obligatorio"> *</span></label>
-                <input type="number" ngModel name="stock" class="form-control" id="stock" placeholder="Stock" required>
-             </div>
-             <div class="form-group">
-                <label for="categoria">Categoria<span id="obligatorio"> *</span></label>
-                <select ngModel name="categoria" class="form-control form-select" id="categoria">
-                                <option selected>Elige la categoria</option>
-                                <option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
-                </select>
-             </div>
-             <div class="campoObligatorio">
-                <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
-            </div>
-             <div class="modal-footer">
-                <button type="button" id="add-producto-form" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Guardar</button>
-             </div>
-             </form>
-          </div>
+<div id="id01" class="modal">
+   <form class="modal-content">
+     <div class="container">
+       <span (click)="cerrar('delete')" class="close" title="Close Modal" id="cerrardelete">&times;</span>
+       <h5>¿Seguro que quieres eliminar el producto {{deleteProducto?.nombre}}?</h5>
+       <div class="clearfix">
+         <button type="button" (click)="onDeleteProducto(deleteProducto.id)"
+           onclick="document.getElementById('id01').style.display='none'" class="btn-rojo">Eliminar</button>
        </div>
-    </div>
+     </div>
+   </form>
+ </div>
+
+ <div id="id02" class="modal">
+   <div class="modal-content" *ngIf="updateProducto">
+     <span (click)="cerrar('edit')" class="close" title="Close Modal">&times;</span>
+     <h5>Editar Producto: {{updateProducto.nombre}}</h5>
+     <form #editForm="ngForm">
+      <input type="hidden" ngModel="{{updateProducto?.id}}" name="id" class="form-control" id="id"
+      placeholder="id">
+       <div class="form-group">
+         <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
+         <input type="text" [(ngModel)]="updateProducto.nombre" name="nombre" class="form-control" id="nombre" required>
+       </div>
+       <div class="form-group">
+         <label for="descripcion">Descripción</label>
+         <input type="text" [(ngModel)]="updateProducto.descripcion" name="descripcion" class="form-control" id="descripcion">
+       </div>
+       <div class="form-group">
+         <label for="precio">Precio<span id="obligatorio"> *</span></label>
+         <input type="number" [(ngModel)]="updateProducto.precio" name="precio" class="form-control" id="precio" min="0" required>
+       </div>
+       <div class="form-group">
+         <label for="stock">Stock<span id="obligatorio"> *</span></label>
+         <input type="number" [(ngModel)]="updateProducto.stock" name="stock" class="form-control" id="stock" min="0" required>
+       </div>
+       <div class="form-group">
+         <label for="categoriaNombre">Categoría<span id="obligatorio"> *</span></label>
+         <select ngModel name="categoriaNombre" class="form-control form-select" id="categoriaNombre">
+            <option selected>Elige Categoria</option>
+            <option *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+         </select>
+       </div>
+       <div class="campoObligatorio">
+         <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+       </div>
+       <button (click)="onUpdateProducto(editForm.value)" onclick="document.getElementById('id02').style.display='none'"
+         class="btn-azul">Editar</button>
+     </form>
+   </div>
+ </div>
+
+<!-- Add modal -->
+ <div id="id03" class="modal">
+   <div class="modal-content">
+     <span class="close" (click)="cerrar('add')">&times;</span>
+     <h5>Añadir Producto</h5>
+     <form #addForm="ngForm" (ngSubmit)="onAddProducto(addForm)">
+      <div class="form-group">
+         <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
+         <input type="text" ngModel name="nombre" class="form-control" id="nombre" required>
+       </div>
+       <div class="form-group">
+         <label for="descripcion">Descripción</label>
+         <input type="text" ngModel name="descripcion" class="form-control" id="descripcion">
+       </div>
+       <div class="form-group">
+         <label for="precio">Precio<span id="obligatorio"> *</span></label>
+         <input type="number" ngModel name="precio" class="form-control" id="precio" min="0" required>
+       </div>
+       <div class="form-group">
+         <label for="stock">Stock<span id="obligatorio"> *</span></label>
+         <input type="number" ngModel name="stock" class="form-control" id="stock" min="0" required>
+       </div>
+       <div class="form-group">
+         <label for="categoriaNombre">Categoría<span id="obligatorio"> *</span></label>
+         <select ngModel name="categoriaNombre" class="form-control form-select" id="categoriaNombre">
+            <option selected>Elige Categoria</option>
+            <option *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+         </select>
+       </div>
+       <div class="campoObligatorio">
+         <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+       </div>
+       <button [disabled]="addForm.invalid" type="submit"
+         onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
+     </form>
+   </div>
  </div>

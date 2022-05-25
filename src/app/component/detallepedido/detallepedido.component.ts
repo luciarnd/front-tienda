@@ -32,6 +32,7 @@ export class DetallepedidoComponent implements OnInit {
     this.getProductos();
   }
 
+
   public abrirModal(detallePedido: DetallePedido, mode: string) {
     if (mode === 'delete') {
       document.getElementById('id01').style.display = 'block';
@@ -115,5 +116,23 @@ export class DetallepedidoComponent implements OnInit {
   }
   
   
+
+  public search(key: any): void {
+    console.log(key);
+    const res: DetallePedido[] = [];
+    for (const detallePedido of this.detallepedidos) {
+      if(detallePedido.pedidoId == key ||
+      detallePedido.productoNombre.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        res.push(detallePedido);
+      }
+    }
+    this.detallepedidos = res;
+    if (res.length === 0 || !key) {
+      this.detallePedidoService.findAll();
+      this.ngOnInit();
+    }
+  
+  }
+
 
 }

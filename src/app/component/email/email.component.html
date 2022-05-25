@@ -3,22 +3,22 @@
         <form #sendForm="ngForm" (ngSubmit)="sendEmail(sendForm)">
             <div>
                 <label for="email">Email</label><br>
-                <input type="text" ngModel name="email" id="email" placeholder="email...">
+                <input type="text" ngModel name="email" id="email" placeholder="Introduce el email" class="form-control">
             </div>
             <div>
                 <label for="asunto">Asunto</label><br>
-                <input type="text" id="asunto" ngModel name="asunto" placeholder="asunto...">
+                <input type="text" id="asunto" ngModel name="asunto" placeholder="Introduce el asunto" class="form-control">
             </div>
             <div class="textarea">
                 <label for="mensaje">Mensaje</label>
-                <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Mensaje..." ngModel></textarea>
+                <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Introduce el mensaje" ngModel class="form-control"></textarea>
             </div>
             <div>
                 <input type="file" [ngModel] (change)="selectFile($event)">
             </div>
             <div class="flex flex-wrap gap-sm w-full">
                 <div class="mt-sm">
-                    <button [disabled]="sendForm.invalid" id="boton" type="submit">Envia email</button>
+                    <button [disabled]="sendForm.invalid" id="boton" type="submit">Enviar</button>
                 </div>
             </div>
         </form>

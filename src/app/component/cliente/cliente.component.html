@@ -1,79 +1,90 @@
 <div class="cliente-container">
-  <div>
-    <div class="cliente-pedido">
+    <div class="cabecera-cliente">
       <h2>Clientes</h2>
-      <button (click)="abrirModal(null,'add')"><i class="fa fa-plus"></i></button>
+      <div id="buscar">
+        <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+        id="searchName"/>
+       </div>
+      <button (click)="abrirModal(null,'add')" class="btn-linea-azul"><i class="fa fa-plus fa-xs"></i></button>
     </div>
     <table>
       <tr>
         <th>ID</th>
         <th>DNI</th>
         <th>Nombre</th>
-        <th>Apellido1</th>
-        <th>Apellido2</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
         <th>Telefono</th>
         <th>Editar</th>
         <th>Eliminar</th>
       </tr>
-      <tr *ngFor="let cliente of clientes | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+      <tr *ngFor="let cliente of clientes | orderBy: 'asc':'id' | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
         <td>{{cliente?.id}}</td>
         <td>{{cliente?.dni}}</td>
         <td>{{cliente?.nombre}}</td>
         <td>{{cliente?.apellido1}}</td>
         <td>{{cliente?.apellido2}}</td>
         <td>{{cliente?.telefono}}</td>
-        <td><button (click)="abrirModal(cliente,'edit')"><i class="fa fa-pen"></i></button></td>
-        <td><button (click)="abrirModal(cliente,'delete')"><i class="fa fa-trash"></i></button></td>
+        <td><button (click)="abrirModal(cliente,'edit')" class="btn-azul-sm"><i class="fa fa-pen fa-xs"></i></button></td>
+        <td><button (click)="abrirModal(cliente,'delete')" class="btn-rojo-sm"><i class="fa fa-trash fa-xs"></i></button></td>
       </tr>
     </table>
     <pagination-controls (pageChange)="page = $event" nextLabel="Siguiente" previousLabel="Anterior" class="paginator">
     </pagination-controls>
-  </div>
+</div>
 
   <!-- Delete modal -->
   <div id="id01" class="modal">
-    <span (click)="cerrar('delete')" class="close" title="Close Modal">x</span>
     <form class="modal-content">
       <div class="container">
-        <p>Seguro que queres eliminar al cliente {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}</p>
+        <span (click)="cerrar('delete')" class="close" title="Close Modal" id="cerrardelete">&times;</span>
+        <h5>¿Seguro que quieres eliminar a {{deleteCliente?.nombre}} {{deleteCliente?.apellido1}}?</h5>
         <div class="clearfix">
-          <button type="button" (click)="cerrar('delete')" class="cancelbtn">Cerrar</button>
           <button type="button" (click)="onDeleteCliente(deleteCliente.id)"
-            onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Eliminar</button>
+            onclick="document.getElementById('id01').style.display='none'" class="btn-rojo">Eliminar</button>
         </div>
       </div>
     </form>
   </div>
+
 
   <!-- Edit Modal -->
   <div id="id02" class="modal">
     <div class="modal-content" *ngIf="updateCliente">
       <span (click)="cerrar('edit')" class="close">&times;</span>
       <p>Edita el cliente {{updateCliente.nombre}}</p>
+  <div id="id02" class="modal">
+    <div class="modal-content" *ngIf="updateCliente">
+      <span (click)="cerrar('edit')" class="close" title="Close Modal">&times;</span>
+      <h5>Editar Cliente: {{updateCliente.nombre}}</h5>
       <form #editForm="ngForm">
+        <input type="hidden" ngModel="{{updateCliente?.id}}" name="id" class="form-control" id="id"
+                            placeholder="id">
         <div class="form-group">
-          <label for="dni">DNI</label>
-          <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni">
+          <label for="dni">DNI<span id="obligatorio"> *</span></label>
+          <input type="text" [(ngModel)]="updateCliente.dni" name="dni" class="form-control" id="dni" required>
         </div>
         <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" [(ngModel)]="updateCliente.nombre" name="nombre" class="form-control" id="nombre">
+          <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
+          <input type="text" [(ngModel)]="updateCliente.nombre" name="nombre" class="form-control" id="nombre" required>
         </div>
         <div class="form-group">
-          <label for="apellido1">Apellido1</label>
-          <input type="text" [(ngModel)]="updateCliente.apellido1" name="apellido1" class="form-control" id="apellido1">
+          <label for="apellido1">Primer Apellido<span id="obligatorio"> *</span></label>
+          <input type="text" [(ngModel)]="updateCliente.apellido1" name="apellido1" class="form-control" id="apellido1" required>
         </div>
         <div class="form-group">
-          <label for="apellido2">Apellido2</label>
+          <label for="apellido2">Segundo Apellido</label>
           <input type="text" [(ngModel)]="updateCliente.apellido2" name="apellido2" class="form-control" id="apellido2">
         </div>
         <div class="form-group">
           <label for="telefono">Telefono</label>
           <input type="text" [(ngModel)]="updateCliente.telefono" name="telefono" class="form-control" id="telefono">
         </div>
-        <button type="button" (click)="cerrar('edit')" class="btn btn-secondary">Cerrar</button>
+        <div class="campoObligatorio">
+          <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+        </div>
         <button (click)="onUpdateCliente(updateCliente)" onclick="document.getElementById('id02').style.display='none'"
-          class="btn btn-primary">Editar</button>
+          class="btn-azul">Editar</button>
       </form>
     </div>
   </div>
@@ -83,28 +94,32 @@
     <div class="modal-content">
       <span (click)="cerrar('add')" class="close">&times;</span>
       <p>Añade un nuevo cliente</p>
+      <span class="close" (click)="cerrar('add')">&times;</span>
+      <h5>Añadir Cliente</h5>
       <form #addForm="ngForm" (ngSubmit)="onAddCliente(addForm)">
         <div class="form-group">
-          <label for="dni">DNI</label>
-          <input type="text" ngModel name="dni" class="form-control" id="dni">
+          <label for="dni">DNI<span id="obligatorio"> *</span></label>
+          <input type="text" ngModel name="dni" class="form-control" id="dni" placeholder="DNI" required>
         </div>
         <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" ngModel name="nombre" class="form-control" id="nombre">
+          <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
+          <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
         </div>
         <div class="form-group">
-          <label for="apellido1">Apellido1</label>
-          <input type="text" ngModel name="apellido1" class="form-control" id="apellido1">
+          <label for="apellido1">Primer Apellido<span id="obligatorio"> *</span></label>
+          <input type="text" ngModel name="apellido1" class="form-control" id="apellido1" placeholder="Primer Apellido" required>
         </div>
         <div class="form-group">
-          <label for="apellido2">Apellido2</label>
-          <input type="text" ngModel name="apellido2" class="form-control" id="apellido2">
+          <label for="apellido2">Segundo Apellido</label>
+          <input type="text" ngModel name="apellido2" class="form-control" id="apellido2" placeholder="Segundo Apellido">
         </div>
         <div class="form-group">
           <label for="telefono">Telefono</label>
-          <input type="text" ngModel name="telefono" class="form-control" id="telefono">
+          <input type="text" ngModel name="telefono" class="form-control" id="telefono" placeholder="Teléfono">
         </div>
-        <button type="button" (click)="cerrar('add')" class="btn btn-secondary">Cerrar</button>
+        <div class="campoObligatorio">
+          <p>Todos los campos marcados con <span id="obligatorio"> *</span> son obligatorios.</p>
+      </div>
         <button [disabled]="addForm.invalid" type="submit"
           onclick="document.getElementById('id03').style.display='none'" class="btn btn-primary">Añadir</button>
       </form>

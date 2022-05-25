@@ -1,7 +1,14 @@
 <div id="categoria-container">
     <div class="cabecera-categoria">
         <h2>Categorias</h2>
+
         <a (click)="abrirModal(null, 'add')"><i class="fa fa-plus"></i></a>
+                <div id="buscar">
+            <input type="search" class="form-control" placeholder="Buscar" (ngModelChange)="search(key.value)" #key="ngModel" ngModel name="key"
+            id="searchName"/>
+        </div>
+        <a (click)="cerrar('add')" class="btn btn-outline-primary btn-sm tooltips"><i class="fa fa-plus fa-xs"></i></a>
+
     </div>
     <table>
         <tr>
@@ -10,7 +17,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr *ngFor="let categoria of categorias | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
+        <tr *ngFor="let categoria of categorias | orderBy: 'asc':'id'  | paginate: {itemsPerPage: 10, currentPage: page}" id="tbody">
             <td>{{categoria.id}}</td>
             <td>{{categoria.nombre}}</td>
             <td>

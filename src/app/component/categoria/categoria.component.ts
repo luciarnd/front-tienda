@@ -25,6 +25,22 @@ export class CategoriaComponent implements OnInit {
     });
   }
 
+  public search(key: any): void {
+    console.log(key);
+    const res: Categoria[] = [];
+    for (const categoria of this.categorias) {
+      if(categoria.nombre.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        res.push(categoria);
+      }
+    }
+    this.categorias = res;
+    if (res.length === 0 || !key) {
+      this.categoriaService.findAll();
+      this.ngOnInit();
+    }
+  
+  }
+
   public onAddCategoria(addForm: NgForm): void {
     // document.getElementById('add-categoria-form')?.click();
     this.categoriaService.addCategoria(addForm.value).subscribe(
