@@ -1,6 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { DetallePedido } from 'src/app/model/detallepedido';
+import { Pedido } from 'src/app/model/pedido';
+import { Producto } from 'src/app/model/producto';
 import { DetallePedidoService } from 'src/app/services/detalle-pedido.service';
+import { PedidoService } from 'src/app/services/pedido.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-detallepedido',
@@ -10,14 +16,27 @@ import { DetallePedidoService } from 'src/app/services/detalle-pedido.service';
 export class DetallepedidoComponent implements OnInit {
 
   detallepedidos: DetallePedido[];
+  updateDetallePedido: DetallePedido;
+  deleteDetallePedido: DetallePedido;
+  pedidos: Pedido[];
+  productos: Producto[];
   page: number = 1;
 
-  constructor(private detallePedidoService: DetallePedidoService) { }
+  constructor(private detallePedidoService: DetallePedidoService, private pedidosService: PedidoService, private productoService: ProductoService) { }
 
   ngOnInit(): void {
     this.detallePedidoService.findAll().subscribe(data => {
       this.detallepedidos = data;
     });
+
+    this.pedidosService.findAll().subscribe(data => {
+      this.pedidos= data;
+    });
+
+    this.productoService.findAll().subscribe(data => {
+      this.productos= data;
+    })
+  
   }
 
   public search(key: any): void {
@@ -36,5 +55,77 @@ export class DetallepedidoComponent implements OnInit {
     }
   
   }
+
+  public abrirModal(detallePedido: DetallePedido | null, mode:string){
+    if(mode === 'delete'){
+      document.getElementById('id01').style.display='block';
+      this.deleteDetallePedido=detallePedido;
+     
+    }
+     if(mode === 'edit'){
+      document.getElementById('id02').style.display='block';
+        this.updateDetallePedido=detallePedido;
+     }
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='block';
+      console.log("Entro");
+      detallePedido=null;
+     }
+
+  }
+
+  public cerrar(mode: string){
+    if (mode === 'delete'){
+      document.getElementById('id01').style.display='none';
+    }
+    if (mode ==='edit'){
+      document.getElementById('id02').style.display='none';
+    }
+    if(mode === 'add'){
+      document.getElementById('id03').style.display='none';
+    }
+  }
+
+  public onAddDetallePedido(addForm: NgForm): void {
+    this.detallePedidoService.addDetallePedido(addForm.value).subscribe(
+      (response: DetallePedido) => {
+        console.log(response);
+        this.detallePedidoService.findAll();
+        addForm.reset();
+        this.ngOnInit();
+      },
+      (error: HttpErrorResponse) => {
+      alert(error.message);
+      addForm.reset();
+    }
+    );
+  }
+
+  public onUpdateDetallePedido(detallePedido: DetallePedido): void {
+    this.detallePedidoService.updateDetallePedido(detallePedido).subscribe(
+      (response: DetallePedido) => {
+        console.log(response);
+        this.detallePedidoService.findAll();
+        this.ngOnInit();
+      },
+      (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  }
+
+  public onDeleteProducto(detallepedidoid: number): void {
+    this.detallePedidoService.deleteDetallePedido(detallepedidoid).subscribe(
+      (response: DetallePedido) => {
+        console.log(response);
+        this.detallePedidoService.findAll();
+        this.ngOnInit();
+      },
+      (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  }
+
 
 }

@@ -79,8 +79,8 @@
        <div class="form-group">
          <label for="categoriaNombre">Categoría<span id="obligatorio"> *</span></label>
          <select ngModel name="categoriaNombre" class="form-control form-select" id="categoriaNombre">
-            <option selected>Elige Categoria</option>
-            <option *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+            <option selected [(ngModel)]="updateProducto.categoriaNombre">{{updateProducto.categoriaNombre}}</option>
+            <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nombre}}</option>
          </select>
        </div>
        <div class="campoObligatorio">
@@ -100,25 +100,25 @@
      <form #addForm="ngForm" (ngSubmit)="onAddProducto(addForm)">
       <div class="form-group">
          <label for="nombre">Nombre<span id="obligatorio"> *</span></label>
-         <input type="text" ngModel name="nombre" class="form-control" id="nombre" required>
+         <input type="text" ngModel name="nombre" class="form-control" id="nombre" required placeholder="Nombre">
        </div>
        <div class="form-group">
          <label for="descripcion">Descripción</label>
-         <input type="text" ngModel name="descripcion" class="form-control" id="descripcion">
+         <input type="text" ngModel name="descripcion" class="form-control" id="descripcion" placeholder="Descripcion">
        </div>
        <div class="form-group">
          <label for="precio">Precio<span id="obligatorio"> *</span></label>
-         <input type="number" ngModel name="precio" class="form-control" id="precio" min="0" required>
+         <input type="number" ngModel name="precio" class="form-control" id="precio" min="0" required placeholder="Precio">
        </div>
        <div class="form-group">
          <label for="stock">Stock<span id="obligatorio"> *</span></label>
-         <input type="number" ngModel name="stock" class="form-control" id="stock" min="0" required>
+         <input type="number" ngModel name="stock" class="form-control" id="stock" min="0" required placeholder="Stock">
        </div>
        <div class="form-group">
-         <label for="categoriaNombre">Categoría<span id="obligatorio"> *</span></label>
-         <select ngModel name="categoriaNombre" class="form-control form-select" id="categoriaNombre">
+         <label for="categoriaId">Categoría<span id="obligatorio"> *</span></label>
+         <select ngModel name="categoriaId" class="form-control form-select" id="categoriaId">
             <option selected>Elige Categoria</option>
-            <option *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+            <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nombre}}</option>
          </select>
        </div>
        <div class="campoObligatorio">
