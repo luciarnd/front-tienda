@@ -1,3 +1,7 @@
 .sobrenosotros_container {
     padding: 15px;
 }
+
+p {
+    width: 50%;
+}

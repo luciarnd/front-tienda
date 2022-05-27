@@ -13,6 +13,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EmailComponent } from './component/email/email.component';
 import { FormsModule } from '@angular/forms';
 import { OrderByPipe } from './pipe/order-by.pipe';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { OrderByPipe } from './pipe/order-by.pipe';
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

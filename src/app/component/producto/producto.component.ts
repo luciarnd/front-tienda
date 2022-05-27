@@ -6,6 +6,7 @@ import * as FileSaver from 'file-saver';
 import { NgForm } from '@angular/forms';
 import { Categoria } from 'src/app/model/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-producto',
@@ -20,7 +21,7 @@ export class ProductoComponent implements OnInit {
   deleteProducto: Producto;
   page: number = 1;
   
-  constructor(private productoService: ProductoService, private categoriaService: CategoriaService) { }
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.productoService.findAll().subscribe(data => {
@@ -30,7 +31,14 @@ export class ProductoComponent implements OnInit {
     this.categoriaService.findAll().subscribe(data => {
       this.categorias = data;
     });
+
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
+
 
   public search(key: any): void {
     console.log(key);

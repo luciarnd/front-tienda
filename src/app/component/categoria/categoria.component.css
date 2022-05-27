@@ -58,6 +58,11 @@ table a:hover {
     color: white;
 }
 
+tr:hover {
+  background-color: #dbdbdb;
+  cursor: pointer;
+}
+
 .paginator ::ng-deep .ngx-pagination {
     margin-bottom: 30px;
 }

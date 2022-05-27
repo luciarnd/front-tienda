@@ -16,11 +16,12 @@ table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 th {
-    border-bottom: 1px solid gray;
-    border-top: 1px solid gray;
+    border-bottom: 1px solid #007bff;
+    border-top: 1px solid #007bff;
     height: 25px;
 }
 
@@ -29,7 +30,12 @@ th {
 }
 
 td {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #007bff;
+}
+
+tr:hover {
+  background-color: #dbdbdb;
+  cursor: pointer;
 }
 
 .btn-azul {
@@ -157,7 +163,7 @@ td {
   }
 
 
-.paginator ::ng-deep .ngx-pagination a:hover,
+  .paginator ::ng-deep .ngx-pagination a:hover,
 .paginator ::ng-deep .ngx-pagination button:hover {
     border: 1px solid #8b8b8b;
     color: black;

@@ -88,8 +88,6 @@
   <!-- Add modal -->
   <div id="id03" class="modal">
     <div class="modal-content">
-      <span (click)="cerrar('add')" class="close">&times;</span>
-      <p>Añade un nuevo cliente</p>
       <span class="close" (click)="cerrar('add')">&times;</span>
       <h5>Añadir Cliente</h5>
       <form #addForm="ngForm" (ngSubmit)="onAddCliente(addForm)">
