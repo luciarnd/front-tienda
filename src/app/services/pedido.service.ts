@@ -17,6 +17,9 @@ export class PedidoService {
    public findAll(): Observable<Pedido[]>{
      return this.http.get<Pedido[]>(`${this.apiBaseUrl}/pedido/all`);
    }
+   public findAllById(id: number): Observable<Pedido>{
+     return this.http.get<Pedido>(`${this.apiBaseUrl}/pedido/getById/${id}`)
+   }
    public updatePedido(pedido: Pedido): Observable<Pedido>{
      return this.http.put<Pedido>(`${this.apiBaseUrl}/pedido/update`, pedido)
    }

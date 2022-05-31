@@ -150,6 +150,11 @@ export class PedidoComponent implements OnInit {
     alert(error.message);
   })
   }
+  public onSelectPedido(id: number): any{
+    this.pedidoService.findAllById(id).subscribe((response: Pedido)=>{
+      this.pedidoService.findAllById(id);
+    })
+  }
 
 
 }

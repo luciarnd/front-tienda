@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'cliente/all', component:ClienteComponent},
   {path: 'categoria/all', component: CategoriaComponent},
   {path: 'nosotros', component: SobreNosotrosComponent},
-  {path: 'email/enviar', component: EmailComponent}
+  {path: 'email/enviar', component: EmailComponent},
 ];
 
 @NgModule({
