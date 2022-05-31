@@ -4,8 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Cliente } from 'src/app/model/cliente';
 import { Pedido } from 'src/app/model/pedido';
+import { Producto } from 'src/app/model/producto';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-pedido',
@@ -13,14 +15,15 @@ import { PedidoService } from 'src/app/services/pedido.service';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent implements OnInit {
-
   pedidos: Pedido[];
+  productos: Producto[];
+  deletePedidoByProducto: Pedido;
   deletePedido: Pedido;
   updatePedido: Pedido;
   clientes: Cliente[];
   page: number = 1;
 
-  constructor(private pedidoService: PedidoService, private clienteService: ClienteService) { }
+  constructor(private pedidoService: PedidoService, private clienteService: ClienteService, private productoService: ProductoService) { }
 
   ngOnInit(): void {
     this.pedidoService.findAll().subscribe(data => {
@@ -30,6 +33,10 @@ export class PedidoComponent implements OnInit {
     this.clienteService.findAll().subscribe(data => {
       this.clientes = data;
     });
+
+    this.productoService.findAll().subscribe(data => {
+      this.productos = data;
+    })
   }
 
   public search(key: any): void {
@@ -53,7 +60,7 @@ export class PedidoComponent implements OnInit {
   public abrirModal(pedido: Pedido | null, mode:string){
     if(mode === 'delete'){
       document.getElementById('id01').style.display='block';
-      this.deletePedido=pedido;
+      this.deletePedidoByProducto=pedido;
      
     }
      if(mode === 'edit'){
@@ -64,6 +71,13 @@ export class PedidoComponent implements OnInit {
       document.getElementById('id03').style.display='block';
       console.log("Entro");
       pedido=null;
+     }
+     if (mode === 'deletePedido') {
+       this.pedidoService.findAll().subscribe(deletePedido =>{
+         deletePedido=this.pedidos;
+       })
+       document.getElementById('id04').style.display = 'block';
+        this.deletePedido=pedido;
      }
 
   }
@@ -77,6 +91,9 @@ export class PedidoComponent implements OnInit {
     }
     if(mode === 'add'){
       document.getElementById('id03').style.display='none';
+    } 
+    if (mode === 'deletePedido') {
+      document.getElementById('id04').style.display = 'none';
     }
   }
 
@@ -98,6 +115,7 @@ export class PedidoComponent implements OnInit {
   }
 
   public onUpdatePedido(pedido: Pedido): void {
+    console.log(pedido);
     this.pedidoService.updatePedido(pedido).subscribe(
       (response: Pedido) => {
         console.log(response);
@@ -110,8 +128,20 @@ export class PedidoComponent implements OnInit {
     );
   }
 
-  public onDeletePedido(pedidoid: number): void{
-    this.pedidoService.deletePedido(pedidoid).subscribe((response: Pedido)=>{
+  public onDeletePedidoByProducto(pedidoid: number, productoId: number): void{
+    this.pedidoService.deletePedidoByProducto(pedidoid, productoId).subscribe((response: Pedido)=>{
+      console.log(response);
+      this.pedidoService.findAll();
+      this.ngOnInit();
+    },
+    (error: HttpErrorResponse) => {
+    alert(error.message);
+  })
+  }
+
+  public onDeletePedido(id: number): void{
+    console.log(id);
+    this.pedidoService.deletePedido(id).subscribe((response: Pedido)=>{
       console.log(response);
       this.pedidoService.findAll();
       this.ngOnInit();

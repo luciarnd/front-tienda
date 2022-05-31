@@ -23,7 +23,11 @@ export class PedidoService {
    public addPedido(pedido: Pedido): Observable<Pedido>{
      return this.http.post<Pedido>(`${this.apiBaseUrl}/pedido/add`, pedido)
    }
+   public deletePedidoByProducto(id: number, productoId: number): Observable<Pedido>{
+     return this.http.delete<Pedido>(`${this.apiBaseUrl}/pedido/deletePedidoByProducto/${id}/${productoId}`)
+   }
+
    public deletePedido(id: number): Observable<Pedido>{
-     return this.http.delete<Pedido>(`${this.apiBaseUrl}/pedido/delete/${id}`)
+    return this.http.delete<Pedido>(`${this.apiBaseUrl}/pedido/delete/${id}`)
    }
 }
